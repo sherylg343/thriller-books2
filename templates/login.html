@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="container-reg">
+	<!-- flash messages -->
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        {% for message in messages %}
+	            <div class="row flashes blue lighten-1 white-text text-uppercase">
+		            <h4 class="center-align">{{ message }}</h4>
+	            </div>
+	        {% endfor %}
+	    {% endif %}
+	{% endwith %}
+</section>
+
+
+    <div class="row">
+        <h3>Log In</h3>
+    </div>
+    <div class="row">
+		<form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
+            <div class="card-panel">
+            <!-- Email -->
+                <div class="row">
+                    <div class="input-field col s12">
+					    <i class="fas fa-user-cog prefix grey-text"></i>
+					    <input id="email" name="email" type="email" class="validate">
+					    <label for="email">Email</label>
+				    </div>
+			    </div>
+			<!-- Password -->
+			    <div class="row">
+				    <div class="col s12 input-field">
+					    <i class="fas fa-user-lock prefix grey-text"></i>
+					    <input id="password" name="password" type="password" class="validate">
+					    <label for="password">Password</label>
+				    </div>
+			    </div>
+			<!-- Log In -->
+			    <div class="row">
+				    <button type="submit" class="col s12 btn-large yellow text-shadow">Log In
+                        <i class="fas fa-sign-in-alt"></i>
+                    </button>
+			    </div>
+            </div>
+	    </form>
+    </div>
+
+<div class="row">
+    <div class="col-sm-12 pb-5">
+        <p class="text-center">
+            New Here? <a href="{{ url_for('register') }}">    Register Account</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

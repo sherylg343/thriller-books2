@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Document</title>
 </head>
-    <ul id="dropdown1 black" class="dropdown-content">
+    <ul id="dropdown1" class="dropdown-content">
         <li><a href="#" class="yellow-text">Log In</a></li>
         <li><a href="#" class="yellow-text">Create Account</a></li>
 </ul>
 <nav>
-    <div class="nav-wrapper black">
+    <div class="nav-wrapper" id="nav-parent">
       <a href="/static/assets/images/navbar-logo.png" class="brand-logo">Logo</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
@@ -34,7 +34,7 @@
     <li><a href="#" class="yellow-text">Log In</a></li>
     <li><a href="#" class="yellow-text">Create Account</a></li>
   </ul>
-<body>
+<body data-spy="scroll" data-target="nav-parent">
 
 
 
