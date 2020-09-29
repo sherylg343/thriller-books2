@@ -1,8 +1,7 @@
 import os
-import requests
 import json
 from flask import (
-    Flask, flash, render_template, redirect, url_for)
+    Flask, flash, render_template, request, redirect, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from requests.exceptions import HTTPError
