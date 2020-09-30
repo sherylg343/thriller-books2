@@ -4,7 +4,7 @@ body {
 
 
 /*------- Text and Headers -----------*/
-header.masthead {
+.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
@@ -16,7 +16,7 @@ header.masthead {
   background-size: cover;
 }
 
-header.masthead.masthead-subheading {
+.masthead-subheading {
   text-align: center;
   font-size: 2rem;
   font-style: italic;
