@@ -70,6 +70,21 @@ h3.section-subheading {
   }
 }
 
+/*--------------- Navigation --------------*/
+.brand-logo {
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.brand-logo img {
+    height: 1.8rem;
+}
+
 /*--------------- Cards --------------*/
 .card-container {
     display: flex;
