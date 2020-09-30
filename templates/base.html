@@ -18,7 +18,7 @@
 	<div class="nav-wrapper" id="nav-parent">
 		<a href="{{ url_for('get_home') }}" class="brand-logo ml-4">
 			<img href="{{ url_for('static', filename='assets/images/navbar-logo.png') }}" alt="Find Thrillers" />
-      </a>
+       </a>
 			<a href="#" data-target="mobile-demo"
 				class="sidenav-trigger transparent"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
@@ -49,5 +49,19 @@
 	<script href="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 </body>
-
+ <!-- Footer-->
+        <footer class="footer yellow">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col s12 m4">Copyright © Find Thrillers 2020</div>
+                    <div class="col 12 m4">
+                        <a href="https://mtouch.facebook.com/login/"><i class="fab fa-facebook-square black"></i></a>
+                        <a href="https://www.instagram.com/accounts/login/?hl=en"><i class= "fab fa-instagram black"></i></a>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="/templates/review-guidelines.html">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 </html>
