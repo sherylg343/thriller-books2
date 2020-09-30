@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Masthead-->
+<header class="masthead">
+	<div class="container-fluid">
+		<div class="masthead-heading text-uppercase pt-5">Book Search</div>
+		<div class="row">
+			<div id="col searchBox">
+				<form id="search-form" class="form-inline d-flex justify-content-center">
+                    <div class="input-field col s12" type="text" id="search-text">
+					    <select id="typeSearch">
+                            <option value="-" disabled selected>Choose your option</option>
+                            <option value="Author">Author</option>
+                            <option value="Title">Title</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12" type="text">          
+					    <select id="order-search">
+                            <option value="relevance">Relevance</option>
+                            <option value="publish-date">Publish Date</option>
+                        </select>
+                    </div>
+					<input type="type" placeholder="search" name="search" />
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="container">
+	<div class="text-center">
+		<h2 class="section-heading text-uppercase pt-5 pb-4">
+			Book Search Results
+		</h2>
+	</div>
+
+	<div id="searchResultsText"></div>
+	<div id="searchResults"></div>
+	<div id="pagination"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
+<script src="{{ url_for('static', 'assets/js/script.js') }}"></script>
+
+{% endblock %}
