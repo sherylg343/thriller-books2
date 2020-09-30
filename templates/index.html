@@ -1,19 +1,45 @@
 {% extends 'base.html' %} {% block content %}
 
 <header>
-	<div class="jumbotron-fluid jumbotron">
+	<div class="masthead">
 		<div class="container">
-			<h5 class="jumbotron-sub">Welcome To Our Reader Community . . .</h5>
-			<h2 class="jumbotron-head text-uppercase"></h2>
+			<div class="masthead-subheading">Welcome To Our Reader Community . . .</div>
+			<div class="masthead-heading"></div>
 			f or Thriller & Suspense Novels!
 			<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Featured Books</a>
 		</div>
 	</div>
 </header>
 
+<!-- Featured Books 
+<section class="page-section" id="featured">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Featured Books</h2>
+      <h3 class="section-subheading text-muted">
+        Newly released books for you to check out.
+      </h3>
+    </div>
+    <div class="card-container">
 
-
-
+      {% for book in featured %}
+        {% if book.featured %}
+      <div class="card m-3 p-3">
+        <div class="card-image">
+            <img src="{{ book.image }}">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <h6 class="card-subtitle">{{ book.author}}</h6>
+            <p><a class="link-text" href="#">See Book Profile & Reviews</a></p>
+        </div>
+      </div>
+        {% endif %}
+    {% endfor %}
+     </div>
+  </div>
+</section>
+-->
 
 
 

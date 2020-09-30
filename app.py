@@ -31,7 +31,7 @@ MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
 @app.route('/get_home')
 def get_home():
     return render_template(
-        "index.html", 
+        "index.html",
         featured=mongo.db.feature_books.find())
 
 
