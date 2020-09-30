@@ -16,7 +16,7 @@ header.masthead {
   background-size: cover;
 }
 
-.masthead-subheading {
+header.masthead.masthead-subheading {
   text-align: center;
   font-size: 2rem;
   font-style: italic;
