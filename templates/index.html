@@ -27,24 +27,29 @@
 			{% if book.featured %}
 			<div class="col s12 m7">
 				<div class="card horizontal">
-					<div class="card-image">
-						<img src="{{ book.image }}">
-                    </div>
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="{{ book.image }}">
+					</div>
 					<div class="card-stacked">
 						<div class="card-content">
-							<p class="card-title">{{ book.title }}</p>
+							<span class="card-title activator black-text">
+							    {{ book.title }}<i class="material-icons right">more_vert</i></span>
 							<p class="card-subtitle">{{ book.author}}</p>
-						</div>
+                        </div>
 						<div class="card-action">
 							<a href="(( url_for('book_profile') }}">Book Profile & Reviews</a>
 						</div>
 					</div>
+                    <div class="card-reveal">
+                        <span class="card-title black-text">{{ book.title }}<i class="material-icons right">close</i></span>
+						<p>{{ book.description }}</p>
 					</div>
 				</div>
+			</div>
 			{% endif %}
 			{% endfor %}
-			</div>
 		</div>
+	</div>
 </section>
 
 
