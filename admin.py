@@ -24,8 +24,9 @@ API_KEY = os.environ.get('API_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 MONGO_URI = os.environ.get('MONGO_URI_BOOKS')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
-    
 
+
+@app.route('/')
 @app.route('/get_feature_image')
 def get_feature_image():
     check_images = mongo.db.feature_books.find()
@@ -53,8 +54,10 @@ def get_feature_image():
             except Exception as err:
                 print(f'Other error occurred: {err}')
 
+    return "test"
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
-            port=5001,
+            port=int(os.environ.get('PORT')),
             debug=True)
