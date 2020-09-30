@@ -9,7 +9,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/images/milestone3cover.jpg");
+  background-image: url("..static/assets/images/milestone3cover.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -82,10 +82,10 @@ h3.section-subheading {
 }
 
 .brand-logo img {
-    height: 1.8rem;
+    height: 2rem;
 }
 
-/*--------------- Cards --------------*/
+/*--------------- Cards --------------
 .card-container {
     display: flex;
     flex-flow: column wrap;
@@ -107,6 +107,7 @@ h3.section-subheading {
     border-radius: 0.25rem;
     text-align: center;
 }
+*/
 
 
 .flashes h4 {
