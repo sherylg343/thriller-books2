@@ -10,29 +10,31 @@
 	<link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" />
 	<title>Find Thrillers</title>
 </head>
-<ul id="dropdown1" class="dropdown-content yellow white-text">
-	<li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
-	<li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
-</ul>
-<nav class="black yellow-text">
-	<div class="nav-wrapper" id="nav-parent">
-		<a href="{{ url_for('get_home') }}" class="brand-logo ml-4">
-			<img href="{{ url_for('static', filename='assets/images/navbar-logo.png') }}" alt="Find Thrillers" />
-       </a>
-			<a href="#" data-target="mobile-demo"
-				class="sidenav-trigger transparent"><i class="material-icons">menu</i></a>
-			<ul class="right hide-on-med-and-down">
-				<li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
-				<li><a href="#featured" class="yellow-text">Featured Books</a></li>
-				<li><a href="#" class="yellow-text">Book Search</a></li>
-				<li><a href="#" class="yellow-text">My Book Reviews</a></li>
-				<li><a class="dropdown-trigger yellow-text" href="#!" data-target="dropdown1">My
-						Account<i class="material-icons yellow-text right">arrow_drop_down</i></a></li>
-			</ul>
-	</div>
-</nav>
 
 <body data-spy="scroll" data-target="nav-parent">
+    <ul id="dropdown1" class="dropdown-content yellow white-text">
+        <li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
+        <li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
+    </ul>
+
+    <nav class="black yellow-text">
+        <div class="nav-wrapper" id="nav-parent">
+            <a href="{{ url_for('get_home') }}" class="brand-logo ml-4">
+                <img href="{{ url_for('static', filename='assets/images/navbar-logo.png') }}" alt="Find Thrillers" />
+        </a>
+                <a href="#" data-target="mobile-demo"
+                    class="sidenav-trigger transparent"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
+                    <li><a href="#featured" class="yellow-text">Featured Books</a></li>
+                    <li><a href="#" class="yellow-text">Book Search</a></li>
+                    <li><a href="#" class="yellow-text">My Book Reviews</a></li>
+                    <li><a class="dropdown-trigger yellow-text" href="#!" data-target="dropdown1">My
+                            Account<i class="material-icons yellow-text right">arrow_drop_down</i></a></li>
+                </ul>
+        </div>
+    </nav>
+
 	<ul class="sidenav black" id="mobile-demo">
 		<li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
 		<li><a href="#" class="yellow-text">Featured Books</a></li>
@@ -45,23 +47,24 @@
     {% block content %}
     {% endblock %}
 
+    <!-- Footer-->
+    <footer class="footer yellow">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col s12 m4">Copyright © Find Thrillers 2020</div>
+                <div class="col 12 m4">
+                    <a href="https://mtouch.facebook.com/login/"><i class="fab fa-facebook-square black"></i></a>
+                    <a href="https://www.instagram.com/accounts/login/?hl=en"><i class= "fab fa-instagram black"></i></a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="/templates/review-guidelines.html">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script href="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
-</body>
- <!-- Footer-->
-        <footer class="footer yellow">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col s12 m4">Copyright © Find Thrillers 2020</div>
-                    <div class="col 12 m4">
-                        <a href="https://mtouch.facebook.com/login/"><i class="fab fa-facebook-square black"></i></a>
-                        <a href="https://www.instagram.com/accounts/login/?hl=en"><i class= "fab fa-instagram black"></i></a>
-                    </div>
-                    <div class="col s12 m4">
-                        <a href="/templates/review-guidelines.html">Terms of Use</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    </body>
 </html>
