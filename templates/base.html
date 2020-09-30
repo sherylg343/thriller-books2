@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="/static/assets/css/style.css" rel="stylesheet" />
-    <title>Find Thrillers</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="{{ url_for('static', filename='assets/css.style.css' }}" rel="stylesheet" />
+	<title>Find Thrillers</title>
 </head>
-    <ul id="dropdown1" class="dropdown-content yellow white-text">
-        <li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
-        <li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
+<ul id="dropdown1" class="dropdown-content yellow white-text">
+	<li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
+	<li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
 </ul>
-<nav>
-    <div class="nav-wrapper" id="nav-parent">
-      <a href="{{ url_for('get_home') }}" class="brand-logo transparent ml-4"><img src="static/assets/img/navbar-logo.png" alt="Find Thrillers" /></a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger transparent"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down transparent">
-        <li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
-        <li><a href="#featured" class="yellow-text">Featured Books</a></li>
-        <li><a href="#" class="yellow-text">Book Search</a></li>
-        <li><a href="#" class="yellow-text">My Book Reviews</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">My Account<i class="material-icons yellow-text right">arrow_drop_down</i></a></li>
-      </ul>
-    </div>
-  </nav>
-<body>
-<!-- <ul class="sidenav black" id="mobile-demo">
-    <li><a href="#" class="yellow-text">Home</a></li>
-    <li><a href="#" class="yellow-text">Featured Books</a></li>
-    <li><a href="#" class="yellow-text">Book Search</a></li>
-    <li><a href="#" class="yellow-text">My Book Reviews</a></li>
-    <li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
-    <li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
-  </ul>
+<nav class="black yellow-text">
+	<div class="nav-wrapper" id="nav-parent">
+		<a href="{{ url_for('get_home') }}" class="brand-logo ml-4">
+			<img href="{{ url_for('static', filename='assets/images/navbar-logo.png' }}" alt="Find Thrillers" />
+      </a>
+			<a href="#" data-target="mobile-demo"
+				class="sidenav-trigger transparent"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
+				<li><a href="#featured" class="yellow-text">Featured Books</a></li>
+				<li><a href="#" class="yellow-text">Book Search</a></li>
+				<li><a href="#" class="yellow-text">My Book Reviews</a></li>
+				<li><a class="dropdown-trigger yellow-text" href="#!" data-target="dropdown1">My
+						Account<i class="material-icons yellow-text right">arrow_drop_down</i></a></li>
+			</ul>
+	</div>
+</nav>
+
 <body data-spy="scroll" data-target="nav-parent">
---> 
+	<ul class="sidenav black" id="mobile-demo">
+		<li><a href="{{ url_for('get_home' }}" class="yellow-text">Home</a></li>
+		<li><a href="#" class="yellow-text">Featured Books</a></li>
+		<li><a href="#" class="yellow-text">Book Search</a></li>
+		<li><a href="#" class="yellow-text">My Book Reviews</a></li>
+		<li><a href="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
+		<li><a href="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
+	</ul>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
-  <script src="/static/assets/js/script.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script href="{{ url_for('static', filename='assets/js/script.js' }}"></script>
 
 </body>
+
 </html>

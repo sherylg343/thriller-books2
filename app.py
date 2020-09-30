@@ -1,11 +1,8 @@
 import os
-import json
-import requests
 from flask import (
     Flask, flash, render_template, request, redirect, url_for)
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
-from requests.exceptions import HTTPError
+#from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
