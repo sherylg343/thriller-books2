@@ -24,8 +24,8 @@ body {
     font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     color: white;
     position: absolute;
-    margin-top: -9rem;
-    margin-left: 7%;
+    margin-top: -10rem;
+    margin-left: 22%;
 }
 
  .masthead-heading {
@@ -36,8 +36,9 @@ body {
     margin-bottom: 2rem;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     position: absolute;
-    margin-top: -9rem;
+    margin-top: -10rem;
     color: white;
+    margin-left: 17%;
 }
 
 h2.section-heading {
@@ -70,8 +71,7 @@ h3.section-subheading {
 
 #mast-link {
     position: absolute;
-    margin-top: -8rem;
-    margin-left: -16%;
+    margin-top: -9rem;
 }
 
 
@@ -102,12 +102,11 @@ h3.section-subheading {
 }
 
 /*--------------- Sections --------------*/
-#masthead-container {
+.masthead-container {
     top: 40vh;
-    margin-left: 12%;
 }
 
-#featured {
+.featured {
     position: absolute;
     margin-top: -5rem;
 }
@@ -140,36 +139,84 @@ h3.section-subheading {
 
 @media (min-width: 576px) {
     .masthead-subheading {
-        margin-top: -15rem;
         font-size: 1.25rem;
         line-height: 1.25rem;
+        margin-top: -15rem;
     } 
     .masthead-heading {
         margin-top: -14rem;
         font-size: 1.75rem;
         line-height: 1.75rem;
+        margin-top: -14rem;
     } 
-    .masthead-container {
-        margin-top: 11rem;
-        margin-left: 18%;
+    .featured {
+        margin-left: 10%;
     }
-
+    #mast-link {
+        margin-top: -11rem;
+    }
 }
 
-
-
-
 @media (min-width: 768px) {
-  header #masthead .masthead-subheading {
-    font-size: 3rem;
-    font-style: italic;
-    line-height: 2.6rem;
-    margin-bottom: 3rem;
-  }
-  header #masthead .masthead-heading {
-    font-size: 4.5rem;
-    font-weight: 700;
-    line-height: 4.5rem;
-    margin-bottom: 4rem;
-  }
+    .masthead-subheading {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin-top: -20rem;
+        margin-left: 18%;
+    }
+    .masthead-heading {
+        font-size: 3.25rem;
+        font-weight: 700;
+        line-height: 3.25rem;
+        margin-top: -18rem;
+        margin-left: 14%;
+        margin-right: 14%;
+    }
+    .featured {
+        margin-left: 20%;
+    }
+    #mast-link {
+        margin-top: -11rem;
+    }
+    h2.section-heading {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        padding-top: 5rem;
+    }
+    h3.section-subheading {
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+}
+
+@media (min-width: 992px) {
+    .masthead-subheading {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        margin-top: -22rem;
+        margin-left: 18%;
+    }
+    .masthead-heading {
+        font-size: 3.5rem;
+        line-height: 3.5rem;
+        margin-top: -19rem;
+        margin-left: 12%;
+        margin-right: 10%;
+    }
+    .featured {
+        margin-left: 20%;
+    }
+    .featured.container {
+        width: 80%;
+    }
+    #mast-link .btn-large {
+        margin-top: -11rem;
+    }
+    h2.section-heading {
+        font-size: 3rem;
+        line-height: 3rem;
+        padding-top: 5rem;
+    }
+    h3.section-subheading {
+        font-size: 1.5rem !important;
+        line-height: 1.5rem;
 }
