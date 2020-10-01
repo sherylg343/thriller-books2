@@ -16,14 +16,9 @@ body {
     position: relative;
 }
 
-#masthead-container {
-    position: relative;
-    top: 40vh;
-    width: 100%;
-}
-
 .masthead-subheading {
     text-align: center;
+    padding-top: 17vh;
     font-size: 2rem;
     font-style: italic;
     line-height: 1.5rem;
