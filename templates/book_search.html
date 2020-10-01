@@ -1,41 +1,72 @@
 {% extends 'base.html' %} {% block content %}
 
 <!-- Masthead-->
-<header class="masthead">
-	<div class="container-fluid">
-		<div class="masthead-heading text-uppercase pt-5">Book Search</div>
+<header id="masthead">
+    <img class="responsive-img" src="{{ url_for('static', filename='assets/images/bg-header.jpg') }}">
+	<div class="container" id="masthead-container">
+        <div class="row">
+            <div class="col s12 center-align white-text">
+		        <div class="masthead-heading">Book Search</div>
+            </div>
+        </div>
 		<div class="row">
-			<div id="col searchBox">
-				<form id="search-form" class="form-inline d-flex justify-content-center">
-                    <div class="input-field col s12" type="text">
-					    <select id="search-type" name="search-type">
-                            <option value="-" disabled selected>Choose your option</option>
+			<div class="col s12 center-align">
+				<form id="search-form">
+                    <div class="input-field col s12">
+                        <select id="search-type" name="search-type" class="white black-text" required>
+                            <option value="" disabled selected>Choose your search criteria</option>
                             <option value="author">Author</option>
                             <option value="title">Title</option>
-                        </select>
+                        </select>		
+					    <input type="search" id="search" placeholder="search" name="search" required/>
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                        <i class="material-icons">close</i>
                     </div>
-					<input type="type" placeholder="search" name="search" />
-                    <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
 			</div>
 		</div>
 	</div>
 </header>
 
-<div class="container">
-	<div class="text-center">
-		<h2 class="section-heading text-uppercase pt-5 pb-4">
-			Book Search Results
-		</h2>
-	</div>
+<!-- Search Results -->
+<section class="page-section" id="search-results">
+	<div class="container">
+		<div class="center-align">
+			<h2 class="text-uppercase section-heading">Book Search Results</h2>
+	    </div>
 
-	<div id="searchResultsText"></div>
-	<div id="searchResults"></div>
-	<div id="pagination"></div>
-</div>
+	<div class="card-container">
+        <div class="col s12 m7">
+				<div class="card horizontal hoverable">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="#">IMAGE
+					</div>
+					<div class="card-stacked">
+						<div class="card-content">
+							<span class="card-title activator black-text">
+							    TITLE<i class="material-icons right">more_vert</i></span>
+							<p class="card-subtitle">AUTHOR1</p>
+                            <p class="card-subtitle">AUTHOR2</p>
+                        </div>
+						<div class="card-action">
+							<a href="(( url_for('book_profile') }}">Book Profile & Reviews</a>
+						</div>
+					</div>
+                    <div class="card-reveal">
+                        <span class="card-title black-text">TITLE<i class="material-icons right">close</i></span>
+						<p>DESCRIPTION</p>
+					</div>
+				</div>
+			</div>
+    </div>
+	</div>
+</section>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
-<script src="{{ url_for('static', 'assets/js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 {% endblock %}
+
+
