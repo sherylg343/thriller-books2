@@ -71,7 +71,6 @@ def get_feature_image():
                 print(f'Other error occurred: {err}')
 
     
-
 @app.route("/book_search", methods=["GET", "POST"])
 def book_search():
     return render_template("book_search.html")
@@ -96,7 +95,6 @@ def book_search():
         print(f'Other error occurred: {err}')
             
 
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -107,10 +105,9 @@ def register():
             {"display_name": request.form.get(
                 "create-display-name")})
 
-        if existing_email:    
+        if existing_email:
             flash("Email already exists")
             return redirect({{ url_for("register") }})
-
 
         elif existing_display_name:
             flash("Display Name already exists")
@@ -156,7 +153,6 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
-
 
 
 if __name__ == '__main__':
