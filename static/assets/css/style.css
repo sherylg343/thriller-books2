@@ -103,3 +103,21 @@ h3.section-subheading {
   display: block;
   height: 5rem;
 }
+
+@media (min-width: 768px) {
+    .brand-logo img {
+        height: 3rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .brand-logo img {
+        height: 3.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .brand-logo img {
+        height: 4rem;
+    }
+}
