@@ -1,13 +1,20 @@
 {% extends 'base.html' %} {% block content %}
 
-<header>
-		<div class="container masthead">
-			<div class="masthead-subheading">Welcome To Our Reader Community . . .</div>
-			<div class="masthead-heading"></div>
-			for Thriller & Suspense Novels!
-			<a class="waves-effect yellow btn-large black-text text-uppercase js-scroll-trigger"
-				href="#services">Featured Books</a>
-		</div>
+<header id="masthead">
+	<div class="container-fluid no-gutters" id="masthead-container">
+        <div class="row">
+            <div class="col s12 mx-auto">
+		        <p class="masthead-subheading">Welcome To Our Reader Community . . .
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 mx-auto">
+		        <p class="masthead-heading">for Thriller & Suspense Novels!</p>
+            </div>
+        </div>
+		<a class="waves-effect yellow btn-large black-text text-uppercase js-scroll-trigger" href="#services">Featured Books</a>     
+	</div>
 </header>
 
 <!-- Featured Books -->
@@ -45,7 +52,7 @@
 				</div>
 			</div>
 			{% endif %}
-			{% endfor %}
+			{% endfor %}add <div class=""></div>
 		</div>
 	</div>
 </section>

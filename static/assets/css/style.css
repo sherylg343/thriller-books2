@@ -4,16 +4,22 @@ body {
 
 
 /*------- Text and Headers -----------*/
-.masthead {
-    background-image: url("..static/assets/images/bg-header.jpg");
-    padding-top: 10.5rem;
-    padding-bottom: 6rem;
-    text-align: center;
-    color: #fff;
+#masthead {
+    background-image: url('../static/assets/images/bg-header.jpg');
+    width: 100%;
+    height: 100vh;
+    margin: 0px 0px;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-position: center center;
+    background-position: center top;
     background-size: cover;
+    display: flex;
+    position: relative;
+}
+
+#masthead-container {
+    position: absolute;
+    top: 40vh;
 }
 
 .masthead-subheading {
@@ -59,13 +65,14 @@ h3.section-subheading {
     padding-top: 17rem;
     padding-bottom: 12.5rem;
   }
-  header.masthead .masthead-subheading {
+
+  header #masthead .masthead-subheading {
     font-size: 2.25rem;
     font-style: italic;
     line-height: 2.25rem;
     margin-bottom: 2rem;
   }
-  header.masthead .masthead-heading {
+  header #masthead .masthead-heading {
     font-size: 4.5rem;
     font-weight: 700;
     line-height: 4.5rem;
@@ -74,7 +81,7 @@ h3.section-subheading {
 }
 
 /*--------------- Navigation --------------*/
-.brand-logo {
+.brand-logo img {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
