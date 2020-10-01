@@ -18,11 +18,12 @@
         <li><a src="{{ url_for('register') }}" class="white-text">Create Account</a></li>
     </ul>
 <!-- Navigation -->
-    <nav class="black yellow-text">
+    <nav class=" black yellow-text">
         <div class="nav-wrapper">
             <a src="{{ url_for('get_home') }}" class="brand-logo ml-4">
                 <img src="{{ url_for('static', filename='assets/images/navbar-logo.png') }}" alt="Find Thrillers" />
             </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down white-text">
                 <li><a src="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
                 <li><a href="#featured" class="yellow-text">Featured Books</a></li>
@@ -32,6 +33,14 @@
                 </ul>
         </div>
     </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a src="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
+        <li><a href="#featured" class="yellow-text">Featured Books</a></li>
+        <li><a src="{{ url_for('book_search') }}" class="yellow-text">Book Search</a></li>
+        <li><a src="#" class="yellow-text">My Book Reviews</a></li>
+        <li><a src="{{ url_for('login') }}" class="yellow-text">Log In</a></li>
+        <li><a src="{{ url_for('register') }}" class="yellow-text">Create Account</a></li>
+    </ul>
 
 
     {% block content %}

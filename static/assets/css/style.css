@@ -17,11 +17,6 @@ body {
     position: relative;
 }
 
-#masthead-container {
-    position: absolute;
-    top: 40vh;
-}
-
 .masthead-subheading {
     text-align: center;
     font-size: 2rem;
@@ -61,7 +56,7 @@ h3.section-subheading {
 }
 
 @media (min-width: 768px) {
-  header.masthead {
+  header #masthead {
     padding-top: 17rem;
     padding-bottom: 12.5rem;
   }
@@ -95,30 +90,9 @@ h3.section-subheading {
     height: 2rem;
 }
 
-/*--------------- Cards --------------
-.card-container {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: space-around;
-}
-
-.card {
-    padding: 2 rem;
-    margin: 5px;
-    width: 150px;
-    flex-basis: 150px;
-    flex-grow: 1;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 0.25rem;
+#mast-link {
     text-align: center;
 }
-*/
-
 
 .flashes h4 {
     background-color: crimson;
