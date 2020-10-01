@@ -15,63 +15,65 @@ body {
     position: relative;
 }
 
-#masthead-container {
-    top: 40vh;
-}
-
 .masthead-subheading {
     text-align: center;
-    font-size: 2rem;
+    font-size: .75rem;
     font-style: italic;
-    line-height: 1.5rem;
+    line-height: .75rem;
     margin-bottom: 25px;
     font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: white;
+    position: absolute;
+    margin-top: -9rem;
+    margin-left: 7%;
 }
 
  .masthead-heading {
     text-align: center;
-    font-size: 3.25rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    line-height: 3.25rem;
+    line-height: 1.25rem;
     margin-bottom: 2rem;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    position: absolute;
+    margin-top: -9rem;
+    color: white;
 }
 
 h2.section-heading {
     text-align: center;
-    font-size: 2rem;
-    padding-top: 3rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    padding-top: 2rem;
     margin-top: 0;
     margin-bottom: 1rem;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    line-height: 2rem;
+    font-weight: 700; 
 }
 
 h3.section-subheading {
-  font-size: 1.3rem;
+  font-size: 1rem;
+  line-height: 1rem;
   text-align: center;
   font-weight: 400;
   font-style: italic;
   font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   margin-bottom: 4rem;
+  margin-left: 8%;
 }
 
-@media (min-width: 768px) {
-
-  header #masthead .masthead-subheading {
-    font-size: 3rem;
-    font-style: italic;
-    line-height: 2.6rem;
-    margin-bottom: 3rem;
-  }
-  header #masthead .masthead-heading {
-    font-size: 4.5rem;
-    font-weight: 700;
-    line-height: 4.5rem;
-    margin-bottom: 4rem;
-  }
+/*------------- Buttons, Icons ----------*/
+#search-btn {
+    position: relative;
+    margin-left: 0;
 }
+
+#mast-link {
+    position: absolute;
+    margin-top: -8rem;
+    margin-left: -16%;
+}
+
 
 /*--------------- Navigation --------------*/
 .brand-logo img {
@@ -99,6 +101,17 @@ h3.section-subheading {
     font-size: 1.2rem;
 }
 
+/*--------------- Sections --------------*/
+#masthead-container {
+    top: 40vh;
+    margin-left: 12%;
+}
+
+#featured {
+    position: absolute;
+    margin-top: -5rem;
+}
+
 .footer {
   text-align: center;
   font-size: 1.25rem;
@@ -123,4 +136,40 @@ h3.section-subheading {
     .brand-logo img {
         height: 4rem;
     }
+}
+
+@media (min-width: 576px) {
+    .masthead-subheading {
+        margin-top: -15rem;
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+    } 
+    .masthead-heading {
+        margin-top: -14rem;
+        font-size: 1.75rem;
+        line-height: 1.75rem;
+    } 
+    .masthead-container {
+        margin-top: 11rem;
+        margin-left: 18%;
+    }
+
+}
+
+
+
+
+@media (min-width: 768px) {
+  header #masthead .masthead-subheading {
+    font-size: 3rem;
+    font-style: italic;
+    line-height: 2.6rem;
+    margin-bottom: 3rem;
+  }
+  header #masthead .masthead-heading {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 4.5rem;
+    margin-bottom: 4rem;
+  }
 }

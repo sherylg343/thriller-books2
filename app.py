@@ -93,7 +93,12 @@ def book_search():
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-            
+
+
+@app.route("/my_book_reviews", methods=["GET", "POST"])
+def my_book_reviews():
+    return render_template("my_book_reviews.html")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
