@@ -16,11 +16,7 @@ body {
 }
 
 #masthead-container {
-    position: absolute;
     top: 40vh;
-    width: 100%;
-    display: block;
-    margin: auto;
 }
 
 .masthead-subheading {
