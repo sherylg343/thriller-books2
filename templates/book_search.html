@@ -1,6 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 
 <!-- Masthead-->
+<section class="container-reg">
+	<!-- flash messages -->
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        {% for message in messages %}
+	            <div class="row flashes blue lighten-1 white-text text-uppercase">
+		            <h4 class="center-align">{{ message }}</h4>
+	            </div>
+	        {% endfor %}
+	    {% endif %}
+	{% endwith %}
+</section>
 <header id="masthead">
     <img class="responsive-img" src="{{ url_for('static', filename='assets/images/bg-header.jpg') }}">
 	<div class="container no-gutters masthead-container">
