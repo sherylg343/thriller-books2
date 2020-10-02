@@ -90,7 +90,7 @@ def search_api():
         j2_response = response.json()
         if j2_response:
             j2_len = len(j2_response)
-            book_search = {}
+            search_results = {}
             for x in range(j2_len):          
                 title = str(j2_response["items"][x]["volumeInfo"]["title"])
                 author = str(j2_response["items"][x]["volumeInfo"]["authors"][0])
@@ -99,10 +99,10 @@ def search_api():
                 descrip = str(j2_response['items'][x]['volumeInfo']['description'])
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
                 _id = ObjectId()
-                book_search.update({ 
+                search_results.update({ 
                     _id:  {'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
                 })
-        
+                return redirect(url_for('book_search', search_results=search_results))
         else:
             flash("Search returned no results, please adjust your search terms and try again.")
             
@@ -111,7 +111,7 @@ def search_api():
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-    return redirect(url_for('book_search', book_search=book_search))
+    return redirect(url_for('book_search')
 
 
 @app.route("/my_book_reviews", methods=["GET", "POST"])
