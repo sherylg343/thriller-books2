@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 #from bson.objectid import ObjectId
 from requests.exceptions import HTTPError
+from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -71,28 +72,46 @@ def get_feature_image():
                 print(f'Other error occurred: {err}')
 
     
-@app.route("/book_search", methods=["GET", "POST"])
+@app.route("/book_search")
 def book_search():
     return render_template("book_search.html")
-    search_text = request.form.get('search')
-    search_type - request.form.get('search-type')
-    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text + ":" + search_type + '&key=' + API_KEY
+
+
+@app.route("/search_api", methods=["GET", "POST"])
+def search_api():
+    search_text = (request.form.get('search')).lower()
+    search_text_formatted = search_text.replace(" ", "+")
+    search_type = (request.form.get('search-type')).lower()
+    search_type_formatted = "in" + search_type + ":"
+    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text + search_type_formatted + '&key=' + API_KEY
     try: 
         response = requests.get(url)
         response.raise_for_status()
         j2_response = response.json()
-
-        for x in range(20):        
-            title = j2_response["items"][x]["volumeInfo"]["title"]
-            author1 = j2_response["items"][x]["volumeInfo"]["authors"][0]
-            author2 = j2_response["items"][x]["volumeInfo"]["authors"][1]
-            cover_image = j2_response['items'][x]['volumeInfo']['imageLinks']['thumbnail']
-
+        if j2_response:
+            j2_len = len(j2_response)
+            book_search = {}
+            for x in range(j2_len):          
+                title = str(j2_response["items"][x]["volumeInfo"]["title"])
+                author = str(j2_response["items"][x]["volumeInfo"]["authors"][0])
+                sm_image = str(j2_response['items'][x]['volumeInfo']['imageLinks']['smallThumbnail'])
+                pub_date = str(j2_response['items'][x]['volumeInfo']['publishedDate'])
+                descrip = str(j2_response['items'][x]['volumeInfo']['description'])
+                isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
+                _id = ObjectId()
+                book_search.update({ 
+                    _id:  {'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
+                })
+        
+        else:
+            flash("Search returned no results, please adjust your search terms and try again.")
+            
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
 
     except Exception as err:
         print(f'Other error occurred: {err}')
+    return redirect(url_for('book_search', book_search=book_search))
 
 
 @app.route("/my_book_reviews", methods=["GET", "POST"])
