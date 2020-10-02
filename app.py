@@ -111,7 +111,7 @@ def search_api():
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-    return redirect(url_for('book_search')
+    return redirect(url_for('book_search'))
 
 
 @app.route("/my_book_reviews", methods=["GET", "POST"])
