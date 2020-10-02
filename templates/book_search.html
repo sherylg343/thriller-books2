@@ -6,28 +6,26 @@
 	<div class="container-fluid no-gutters masthead-container">
         <div class="row">
             <div class="col s12 center-align white-text">
-		        <div class="masthead-heading">Book Search</div>
+		        <div class="masthead-heading books">Book Search</div>
             </div>
         </div>
         <div class="row">
         	<form id="search-form" class="col s12" action="{{ url_for('book_search') }}" method="POST">
                 <div class="row">
-			        <div class="input-field grey black-text col s12">  
+			        <div class="input-field blue-grey lighten-4 blue-text col s4">  
                         <select id="search-type" name="search-type"  required>
-                            <option value="" class="black-text" disabled selected>Choose your search criteria</option>
+                            <option value="" class="black-text" disabled selected>Search criteria</option>
                             <option value="author" class="black-text">Author</option>
                             <option class="black-text" value="title">Title</option>
                          </select>
-                    </div>
-                </div>
-                <div class="row">    
-                    <div class="input-field col s10">
-					    <input type="search" id="search" class="grey black-text" name="search" required/>
+                    </div>  
+                    <div class="input-field col s6">
+					    <input type="search" id="search" class="blue-grey lighten-4 black-text" name="search" required/>
                         <label class="label-icon black-text" for="search">search</label>
                         <i class="material-icons">close</i>
                     </div>
                     <div class="col s2 left-align">
-                        <a id="search-btn" class="waves-effect waves-light grey btn"><i class="material-icons">search</i></a> 
+                        <a id="search-btn" class="waves-effect waves-light blue-grey lighten-4 btn"><i class="material-icons">search</i></a> 
                     </div>
                 </div> 
            </form>
@@ -39,11 +37,11 @@
 <section class="featured" id="search-results">
 	<div class="container">
 		<div class="center-align">
-			<h2 class="text-uppercase section-heading">Book Search Results</h2>
+			<h2 class="text-uppercase books section-heading">Book Search Results</h2>
 	    </div>
 
-	<div class="card-container">
-        <div class="col s12 m7">
+	<div class="card-container books">
+        <div class="col s12">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src="#">IMAGE
