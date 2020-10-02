@@ -103,39 +103,39 @@ def search_api():
                     _id:  {'book_id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
                 })
                 print(search_results.get('title'))
-    return render_template('book_search.html', search_results=search_results))
-    
+
         else:
             flash("Search returned no results, please adjust your search terms and try again.")
             
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
-        return redirect(url_for('book_search'))
-
+        
     except Exception as err:
         print(f'Other error occurred: {err}')
-        return redirect(url_for('book_search'))
+        
+    return render_template('book_search.html', search_results=search_results)
 
 
 @app.route('/book_profile/<profile_id>')
-def add_review(profile_id):
+def book_profile(profile_id):
     str_profile_id = str(profile_id)
     the_book = search_results.get(str_profile_id)
     print("---------", the_book_)
-    return render_template("book_review_form.html", the_book=the_book)
+    return render_template('book_profile.html', the_book=the_book)
 
 
 @app.route('/add_review/<profile_id>')
 def add_review(profile_id):
     str_profile_id = str(profile_id)
-    the_book = search_results.get(str_profile_id)
+    review_book = search_results.get(str_profile_id)
     print("---------", the_book_)
-    return render_template("book_review_form.html", the_book=the_book)
+    return render_template("my_book_reviews.html", review_book=review_book)
 
 
-@app.route("/my_book_reviews", methods=["GET", "POST"])
-def my_book_reviews():
-    return render_template("my_book_reviews.html")
+@app.route("/my_book_reviews/<display_name>", methods=["GET", "POST"])
+def my_book_reviews(display_name):
+    reviews=mongo.db.book_reviews.find({"display_name": display_name})
+    return render_template("my_book_reviews.html", reviews=reviews)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -158,10 +158,10 @@ def register():
 
         else:
             register = {
-                "email": request.form.get("reg-email"),
+                "email": request.form.get("reg-email").lower(),
                 "password": generate_password_hash(request.form.get(
                     "create-password")),
-                "display_name": request.form.get("create-display-name")
+                "display_name": request.form.get("create-display-name").lower()
             }
             mongo.db.insert_one(register)
 
