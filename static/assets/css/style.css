@@ -64,16 +64,15 @@ h3.section-subheading {
 }
 
 .books.masthead-heading {
-    margin-left: 30%;
-    padding-top: -2rem;
-    padding-bottom: 1 rem;
-    margin-top: 1.5rem;
+    margin-left: 25%;
+    margin-top: -9.5rem;
 }
 
 .books.section-heading {
-    margin-top: -10rem;
     padding-bottom: 1rem;
-    margin-left: 20%;
+    margin-left: 5%;
+    color: black;
+    padding-top: 3rem;
 }
 
 /*------------- Buttons, Icons ----------*/
@@ -88,19 +87,29 @@ h3.section-subheading {
 }
 
 #search-btn {
-    margin-bottom: -3.5rem;
+    margin-bottom: -3rem;
     text-align: center;
-    margin-bottom: 
 }
 
 /*--------------- Inputs --------------*/
 .input-field input[type=search] {
-    height: 3.5rem;
+    height: 2.6rem;
 }
 
 #search-type .select-wrapper input.select-dropdown {
     margin-left: 5px;
 }
+
+.select-wrapper input.select-dropdown {
+    font-size: 10px;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+#search-form .input-field>label {
+    font-size: 0.8rem;
+}
+
 /*--------------- Navigation --------------*/
 .brand-logo img {
   display: inline-block;
@@ -213,6 +222,12 @@ h3.section-subheading {
     .card-container.books {
         margin-left: 25%;
     }
+    #search-btn {
+    margin-bottom: -3rem;
+    }
+    .input-field input[type=search] {
+        height: 3rem;
+    }
 }
 
 @media (min-width: 768px) {
@@ -295,15 +310,15 @@ h3.section-subheading {
     }
     .books.masthead-heading {
         margin-top: -27rem;
-        margin-left: 34%;
+        margin-left: 20%;
     }
    #search-form {
         margin-top: -22rem;
         margin-left: 8%;
     } 
     .books.section-heading {
-        margin-top: .5rem;
-        margin-left: 25%;
+        margin-top: 1rem;
+        margin-left: 0%;
     }
 }
 
