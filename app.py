@@ -100,18 +100,37 @@ def search_api():
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
                 _id = ObjectId()
                 search_results.update({ 
-                    _id:  {'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
+                    _id:  {'book_id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
                 })
-                return redirect(url_for('book_search', search_results=search_results))
+                print(search_results.get('title'))
+    return render_template('book_search.html', search_results=search_results))
+    
         else:
             flash("Search returned no results, please adjust your search terms and try again.")
             
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
+        return redirect(url_for('book_search'))
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-    return redirect(url_for('book_search'))
+        return redirect(url_for('book_search'))
+
+
+@app.route('/book_profile/<profile_id>')
+def add_review(profile_id):
+    str_profile_id = str(profile_id)
+    the_book = search_results.get(str_profile_id)
+    print("---------", the_book_)
+    return render_template("book_review_form.html", the_book=the_book)
+
+
+@app.route('/add_review/<profile_id>')
+def add_review(profile_id):
+    str_profile_id = str(profile_id)
+    the_book = search_results.get(str_profile_id)
+    print("---------", the_book_)
+    return render_template("book_review_form.html", the_book=the_book)
 
 
 @app.route("/my_book_reviews", methods=["GET", "POST"])
