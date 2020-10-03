@@ -81,8 +81,8 @@ def book_search():
 
 @app.route("/search_api", methods=["GET", "POST"])
 def search_api():
-#    if os.path.exists("books.json"):
-#        os.remove("books.json")
+    if os.path.exists("books.json"):
+        os.remove("books.json")
     search_text = request.form.get('search')
     search_text_formatted = search_text.replace(" ", "+")
     search_type = request.form.get('search-type')
@@ -104,16 +104,19 @@ def search_api():
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
                 _id = str(ObjectId())
                 print("----------", title)
-                search_results.update({ 
+                loop_data = {}
+                loop_data = { 
                     'book':  {'id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}        
-                })
-            print("--------", search_results)
+                }
+                print('--------', loop_data)
+                search_results.update(loop_data)
+            #print("--------", search_results)
             #save search results to json file move to json directory for access later
             json_data = json.dumps(search_results)
             f = open("books.json", "w")
             f.write(json_data)
             f.close()
- #           source = "books.json"
+#           source = "books.json"I hav
 #            destination = "data"
 #            new_path = shutil.move(source, destination)
 #            print("------------", new_path)
