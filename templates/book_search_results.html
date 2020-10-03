@@ -5,34 +5,31 @@
 		<div class="center-align">
 			<h2 class="text-uppercase section-heading">Search Results</h2>
 		</div>
-
-{{ results }}
-
+        {% for book in results %}	
 		<div class="card-container">
-
-		
 			<div class="col s12 m7">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="#">
+						<img class="activator" src="{{ book.image }}">
 					</div>
 					<div class="card-stacked">
 						<div class="card-content">
-							<span class="card-title activator black-text">
+							<span class="card-title activator black-text">{{ book.title }}
 							    <i class="material-icons right">more_vert</i></span>
-							<p class="card-subtitle"></p>
+							<p class="card-subtitle">{{ book.author }}</p>
                         </div>
 						<div class="card-action">
 							<a href="(( url_for('book_profile') }}">Book Profile & Reviews</a>
 						</div>
 					</div>
                     <div class="card-reveal">
-                        <span class="card-title black-text"><i class="material-icons right">close</i></span>
-						<p></p>
+                        <span class="card-title black-text">{{ book.title }}<i class="material-icons right">close</i></span>
+						<p>{{ book.description }}</p>
 					</div>
 				</div>
 			</div>
 		</div>
+        {% endfor %}
 	</div>
 </section>
 {% endblock %}

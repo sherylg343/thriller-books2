@@ -5,7 +5,6 @@ import shutil
 from flask import (
     Flask, flash, render_template, request, redirect, url_for)
 from flask_pymongo import PyMongo
-#from bson.objectid import ObjectId
 from requests.exceptions import HTTPError
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -82,11 +81,13 @@ def book_search():
 
 @app.route("/search_api", methods=["GET", "POST"])
 def search_api():
-    search_text = (request.form.get('search')).lower()
+#    if os.path.exists("books.json"):
+#        os.remove("books.json")
+    search_text = request.form.get('search')
     search_text_formatted = search_text.replace(" ", "+")
-    search_type = (request.form.get('search-type')).lower()
+    search_type = request.form.get('search-type')
     search_type_formatted = "in" + search_type + ":"
-    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text + search_type_formatted + '&key=' + API_KEY
+    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text_formatted + search_type_formatted + '&key=' + API_KEY
     try: 
         response = requests.get(url)
         response.raise_for_status()
@@ -102,21 +103,22 @@ def search_api():
                 descrip = str(j2_response['items'][x]['volumeInfo']['description'])
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
                 _id = str(ObjectId())
+                print("----------", title)
                 search_results.update({ 
                     'book':  {'id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}        
                 })
+            print("--------", search_results)
             #save search results to json file move to json directory for access later
             json_data = json.dumps(search_results)
             f = open("books.json", "w")
             f.write(json_data)
-            f,close()
-            source = "books.json"
-            destination = "/data/books.json"
-            shutil.move(source, destination)
-
-
+            f.close()
+ #           source = "books.json"
+#            destination = "data"
+#            new_path = shutil.move(source, destination)
+#            print("------------", new_path)
         else:
-            flash("Search returned no results, please adjust your search terms and try again.")
+            flash("Search returned no results, please change your search terms and try again.")
             
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
@@ -124,16 +126,16 @@ def search_api():
     except Exception as err:
         print(f'Other error occurred: {err}')
         
-    
     return render_template('book_search_results.html')
 
 
 @app.route('/book_search_results')
 def book_search_results():
-    dat = []
-    with open("data/books.json", "r") as json_data:
-        data = json.load(json_data)
-    return render_template('book_search_results.html', results=data)
+    book_data = []
+    with open("books.json", "r") as json_data:
+        book_data = json.load(json_data)
+    print("------------", json_data)
+    return render_template('book_search_results.html', results=book_data)
 
 
 @app.route('/book_profile/<profile_id>')
