@@ -45,40 +45,6 @@
 	</div>
 </header>
 
-<!-- Search Results -->
-<section class="featured" id="search-results">
-	<div class="container">
-		<div class="center-align">
-			<h2 class="text-uppercase books section-heading">Book Search Results</h2>
-	    </div>
-	<div class="card-container books">
-        <div class="col s12">
-                {% for book in search_results %}
-				<div class="card horizontal hoverable">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ book.image }}">
-					</div>
-					<div class="card-stacked">
-						<div class="card-content">
-							<span class="card-title activator black-text">
-							    {{ book.title }}<i class="material-icons right">more_vert</i></span>
-							<p class="card-subtitle">{{ book.author }}</p>
-                            <p class="card-subtitle">{{ book.publication_date }}</p>
-                        </div>
-						<div class="card-action">
-							<a href="(( url_for('book_profile') }}">Book Profile & Reviews</a>
-						</div>
-					</div>
-                    <div class="card-reveal">
-                        <span class="card-title black-text">{{ book.title }}<i class="material-icons right">close</i></span>
-						<p>{{ book.description }}</p>
-					</div>
-				</div>
-                {% endfor %}
-			</div>
-    </div>
-	</div>
-</section>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

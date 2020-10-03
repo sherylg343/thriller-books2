@@ -1,5 +1,7 @@
 import os
 import requests
+import json
+import shutil
 from flask import (
     Flask, flash, render_template, request, redirect, url_for)
 from flask_pymongo import PyMongo
@@ -64,7 +66,8 @@ def get_feature_image():
                              }
                         }
                     )
-                
+
+
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')
 
@@ -74,7 +77,7 @@ def get_feature_image():
 
 @app.route("/book_search")
 def book_search():
-    return render_template("book_search.html")
+    return render_template('book_search.html')
 
 
 @app.route("/search_api", methods=["GET", "POST"])
@@ -98,11 +101,19 @@ def search_api():
                 pub_date = str(j2_response['items'][x]['volumeInfo']['publishedDate'])
                 descrip = str(j2_response['items'][x]['volumeInfo']['description'])
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
-                _id = ObjectId()
+                _id = str(ObjectId())
                 search_results.update({ 
-                    _id:  {'book_id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
+                    'book':  {'id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}        
                 })
-                print("----------", search_results['title'])
+            #save search results to json file move to json directory for access later
+            json_data = json.dumps(search_results)
+            f = open("books.json", "w")
+            f.write(json_data)
+            f,close()
+            source = "books.json"
+            destination = "/data/books.json"
+            shutil.move(source, destination)
+
 
         else:
             flash("Search returned no results, please adjust your search terms and try again.")
@@ -113,15 +124,24 @@ def search_api():
     except Exception as err:
         print(f'Other error occurred: {err}')
         
-    return render_template('book_search.html', search_results=search_results)
+    
+    return render_template('book_search_results.html')
+
+
+@app.route('/book_search_results')
+def book_search_results():
+    dat = []
+    with open("data/books.json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template('book_search_results.html', results=data)
 
 
 @app.route('/book_profile/<profile_id>')
 def book_profile(profile_id):
     str_profile_id = str(profile_id)
-    the_book = search_results.get(str_profile_id)
+#    the_book = search_results.get(str_profile_id)
     print("---------", the_book_)
-    return render_template('book_profile.html', the_book=the_book)
+    return render_template('book_profile.html')
 
 
 @app.route("/register", methods=["GET", "POST"])
