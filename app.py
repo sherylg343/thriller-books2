@@ -71,7 +71,7 @@ def get_feature_image():
             except Exception as err:
                 print(f'Other error occurred: {err}')
 
-    
+
 @app.route("/book_search")
 def book_search():
     return render_template("book_search.html")
@@ -102,7 +102,7 @@ def search_api():
                 search_results.update({ 
                     _id:  {'book_id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}
                 })
-                print(search_results.get('title'))
+                print("----------", search_results['title'])
 
         else:
             flash("Search returned no results, please adjust your search terms and try again.")
@@ -122,20 +122,6 @@ def book_profile(profile_id):
     the_book = search_results.get(str_profile_id)
     print("---------", the_book_)
     return render_template('book_profile.html', the_book=the_book)
-
-
-@app.route('/add_review/<profile_id>')
-def add_review(profile_id):
-    str_profile_id = str(profile_id)
-    review_book = search_results.get(str_profile_id)
-    print("---------", the_book_)
-    return render_template("my_book_reviews.html", review_book=review_book)
-
-
-@app.route("/my_book_reviews/<display_name>", methods=["GET", "POST"])
-def my_book_reviews(display_name):
-    reviews=mongo.db.book_reviews.find({"display_name": display_name})
-    return render_template("my_book_reviews.html", reviews=reviews)
 
 
 @app.route("/register", methods=["GET", "POST"])
