@@ -41,8 +41,41 @@
         <li><a href="{{ url_for('login') }}" class="black-text">Log In</a></li>
         <li><a href="{{ url_for('register') }}" class="black-text">Create Account</a></li>
     </ul>
-
-
+    <section>
+	<!-- flash messages -->
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        {% for message in messages %}
+	            <div class="row flashes blue lighten-1 white-text text-uppercase">
+		            <h4 class="center-align">{{ message }}</h4>
+	            </div>
+	        {% endfor %}
+	    {% endif %}
+	{% endwith %}
+    </section>
+    <section>
+    <div class="row" id="search-row">
+        <form id="search-form" class="col s12" action="{{ url_for('search_api') }}" method="POST">
+            <div class="row">
+			    <div class="input-field white black-text col s4">  
+                    <select id="search-type" name="search-type"  required>
+                        <option value="" class="black-text" disabled selected>Search criteria</option>
+                        <option value="author" class="black-text">Author</option>
+                        <option class="black-text" value="title">Title</option>
+                    </select>
+                </div>  
+                <div class="input-field col s6">
+					<input type="search" id="search" class="white black-text" name="search" required/>
+                    <label class="label-icon black-text" for="search">search</label>
+                     <i class="material-icons">close</i>
+                </div>
+                <div class="col s2 left-align">
+                    <button type="submit" id="search-btn" class="white black-text btn"><i class="material-icons">search</i></button> 
+                </div>
+            </div> 
+        </form>
+    </div>
+   </section>
     {% block content %}
     {% endblock %}
 

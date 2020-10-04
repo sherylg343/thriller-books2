@@ -25,7 +25,7 @@ body {
     color: white;
     position: absolute;
     margin-top: -10rem;
-    margin-left: 22%;
+    margin-left: 15%;
 }
 
  .masthead-heading {
@@ -38,7 +38,7 @@ body {
     position: absolute;
     margin-top: -10rem;
     color: white;
-    margin-left: 8%;
+    margin-left: 3%;
 }
 
 h2.section-heading {
@@ -63,32 +63,16 @@ h3.section-subheading {
   margin-left: 8%;
 }
 
-.books.masthead-heading {
-    margin-left: 25%;
-    margin-top: -9.5rem;
-}
-
-.books.section-heading {
-    padding-bottom: 1rem;
-    margin-left: 5%;
-    color: black;
-    padding-top: 3rem;
-}
-
 /*------------- Buttons, Icons ----------*/
 #search-btn {
     position: relative;
     margin-left: 0;
+    margin-bottom: -3rem;
+    text-align: center;
 }
 
 #mast-link {
-    position: absolute;
     margin-top: -8rem;
-}
-
-#search-btn {
-    margin-bottom: -3rem;
-    text-align: center;
 }
 
 /*--------------- Inputs --------------*/
@@ -102,14 +86,20 @@ h3.section-subheading {
 
 .select-wrapper input.select-dropdown {
     font-size: 10px;
-    height: 2rem;
-    line-height: 2rem;
+    height: 2.5rem; 
+    margin-left: .5rem;
+    margin-bottom: 0;
 }
 
 #search-form .input-field>label {
     font-size: 0.8rem;
 }
 
+#search-form.col.s12 {
+    height: 2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0.75rem;
+}
 /*--------------- Navigation --------------*/
 .brand-logo img {
   display: inline-block;
@@ -148,11 +138,6 @@ h3.section-subheading {
 
 .card-container.books {
     margin-left: 15%;
-}
-
-#search-form {
-    margin-left: 2%;
-    margin-top: -10rem;
 }
 
 .footer {
@@ -202,32 +187,6 @@ h3.section-subheading {
     #mast-link {
         margin-top: -11rem;
     }
-    .card-container.books {
-        margin-left: 10%;
-    }
-    #search-form {
-        margin-left: 5%;
-        margin-top: -12rem;
-    }
-    .books.section-heading {
-        margin-top: 3rem;
-        margin-left: 30%;
-        padding-bottom: 2rem;
-    }
-    .books.masthead-heading {
-        margin-top: -14rem;
-        margin-left: 35%;
-        padding-bottom: 1.5rem;
-    }
-    .card-container.books {
-        margin-left: 25%;
-    }
-    #search-btn {
-    margin-bottom: -3rem;
-    }
-    .input-field input[type=search] {
-        height: 3rem;
-    }
 }
 
 @media (min-width: 768px) {
@@ -235,16 +194,17 @@ h3.section-subheading {
         font-size: 2rem;
         line-height: 2rem;
         margin-top: -20rem;
-        margin-left: 18%;
-    }
+        margin-left: 12%;
+}
     .masthead-heading {
         font-size: 3.25rem;
         font-weight: 700;
         line-height: 3.25rem;
         margin-top: -18rem;
-        margin-left: 14%;
+        margin-left: 8%;
         margin-right: 14%;
     }
+   
     .featured {
         margin-left: 20%;
     }
@@ -264,15 +224,14 @@ h3.section-subheading {
         margin-top: -20rem;
         margin-left: 31%;
     }
-    #search-form {
-        margin-top: -17rem;
+    #search-form.col.s12 {
+        padding-left: 4rem;
     }
-    .card-container.books {
-        margin-left: 20%;
+    .select-wrapper input.select-dropdown {
+        font-size: 1rem;
     }
-    .books.section-heading {
-        margin-top: .5rem;
-        margin-left: 25%;
+    #search-form .input-field>label {
+        font-size: 1rem;
     }
 }
 
@@ -280,21 +239,23 @@ h3.section-subheading {
     .masthead-subheading {
         font-size: 2.5rem;
         line-height: 2.5rem;
-        margin-top: -22rem;
-        margin-left: 18%;
+        margin-top: -26rem;
+        margin-left: 5%;
     }
     .masthead-heading {
         font-size: 3.5rem;
         line-height: 3.5rem;
-        margin-top: -19rem;
-        margin-left: 12%;
-        margin-right: 10%;
+        margin-top: -24rem;
+        margin-left: 1%;
     }
     .featured {
         margin-left: 20%;
     }
     .featured.container {
         width: 80%;
+    }
+    #mast-link {
+        margin-top: -17rem;
     }
     #mast-link .btn-large {
         margin-top: -11rem;
@@ -308,17 +269,14 @@ h3.section-subheading {
         font-size: 1.5rem !important;
         line-height: 1.5rem;
     }
-    .books.masthead-heading {
-        margin-top: -27rem;
-        margin-left: 20%;
+    #search-form.col.s12 {
+        padding-left: 6rem;
     }
-   #search-form {
-        margin-top: -22rem;
-        margin-left: 8%;
-    } 
-    .books.section-heading {
-        margin-top: 1rem;
-        margin-left: 0%;
+    .select-wrapper input.select-dropdown {
+        font-size: 1rem;
+    }
+    #search-form .input-field>label {
+        font-size: 1rem;
     }
 }
 
@@ -327,17 +285,13 @@ h3.section-subheading {
         font-size: 3rem;
         line-height: 3rem;
         margin-top: -32rem;
-        margin-left: 21%;
+        margin-left: 8%;
     }
     .masthead-heading {
         font-size: 4.5rem;
         line-height: 4.5rem;
         margin-top: -27rem;
-        margin-left: 12%;
-        margin-right: 12%;
-    }
-    .featured {
-        width: 80%;
+        margin-left: 3%;
     }
     #mast-link .btn-large {
         margin-top: -16rem;
@@ -358,7 +312,10 @@ h3.section-subheading {
         font-size: 30px;
         padding-top: 8px;
     }
-    #search-form {
-        margin-left: 10%;
+    .select-wrapper input.select-dropdown {
+        font-size: 1.2rem;
+    }
+    #search-form .input-field>label {
+        font-size: 1.2rem;
     }
 }
