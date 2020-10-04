@@ -74,10 +74,6 @@ def get_feature_image():
                 print(f'Other error occurred: {err}')
 
 
-@app.route("/book_search")
-def book_search():
-    return render_template('book_search.html')
-
 
 @app.route("/search_api", methods=["GET", "POST"])
 def search_api():
@@ -149,6 +145,10 @@ def book_profile(profile_id):
     return render_template('book_profile.html')
 
 
+@app.route('/book_review_form/<isbn>')
+def book_review_form(isbn):
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -177,7 +177,8 @@ def register():
             mongo.db.insert_one(register)
 
             #put the new user into the 'session" cookie
-            session["email"] = request.form.get("email")
+            session["email"] = request.form.get("reg-email")
+            session['display_name'] = request.form.get("display_name")
             flash("Account Creation Successful")
 
     return render_template("register.html")
@@ -187,15 +188,20 @@ def register():
 def login():
     if request.method == "POST":
         ## check if username already exists in db
-        existing_email = mongo.db.users.find_one(
+        existing_email= mongo.db.users.find_one(
             {"email": request.form.get("email")})
 
         if existing_email:
             # ensure hashed password matches user input
             if check_password_hash(
                 existing_email["password"], request.form.get("password")):
-                session["email"] = request.form.get("email")
-                flash("Welcome, {}".format(request.form.get("email")))
+                    display_name = existing_email["display_name"]
+                    session["email"] = request.form.get("email")
+                    session["display_name"] = display_name
+                    flash("Welcome, {}".format(display_name))
+                    return redirect(url_for(
+                        "profile", display_name=session['display_name']))
+                    
             else:
                 #invalid password match
                 flash("Incorrect Username and/or Password")
@@ -204,9 +210,18 @@ def login():
         else:
             #username doesn't exist 
             flash("Incorrect Username and/or Password")
-            return redirect(url_for("login"))
+            return redirect(url_for(
+                "profile", display_name=session['display_name']))
 
     return render_template("login.html")
+
+
+@app.route("/profile/<display_name>", methods=["GET", "POST"])
+def profile(display_name):
+    #grab the session user's display-name from the db
+    display_name = mongo.db.users.find_one(
+        {"display_name": session["display_name"]})["display_name"]
+    return render_template("profile.html", display_name=display_name)
 
 
 if __name__ == '__main__':
