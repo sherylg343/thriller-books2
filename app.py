@@ -3,7 +3,7 @@ import requests
 import json
 import shutil
 from flask import (
-    Flask, flash, render_template, request, redirect, url_for)
+    Flask, flash, render_template, request, redirect, url_for, session)
 from flask_pymongo import PyMongo
 from requests.exceptions import HTTPError
 from bson.objectid import ObjectId
@@ -99,14 +99,11 @@ def search_api():
                 descrip = str(j2_response['items'][x]['volumeInfo']['description'])
                 isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
                 _id = str(ObjectId())
-                print("----------", title)
                 loop_data = {}
                 loop_data = { 
                     'book':  {'id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}        
                 }
-                print('--------', loop_data)
                 search_results.update(loop_data)
-            #print("--------", search_results)
             #save search results to json file move to json directory for access later
             json_data = json.dumps(search_results)
             f = open("books.json", "w")
@@ -147,6 +144,7 @@ def book_profile(profile_id):
 
 @app.route('/book_review_form/<isbn>')
 def book_review_form(isbn):
+    return render_template("book_profile.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -188,19 +186,21 @@ def register():
 def login():
     if request.method == "POST":
         ## check if username already exists in db
-        existing_email= mongo.db.users.find_one(
-            {"email": request.form.get("email")})
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
 
         if existing_email:
             # ensure hashed password matches user input
             if check_password_hash(
                 existing_email["password"], request.form.get("password")):
-                    display_name = existing_email["display_name"]
-                    session["email"] = request.form.get("email")
-                    session["display_name"] = display_name
-                    flash("Welcome, {}".format(display_name))
+                    session["email"] = request.form.get("email").lower()
+                    d_name = mongo.db.users.find_one(
+                        {"email": session["email"]})["display_name"]
+                    session["display_name"] =  d_name
+                    flash("Welcome, {}".format(mongo.db.users.find_one(
+                        {"email": session["email"]})["display_name"]))
                     return redirect(url_for(
-                        "profile", display_name=session['display_name']))
+                        "login", display_name=d_name))
                     
             else:
                 #invalid password match
@@ -209,19 +209,28 @@ def login():
 
         else:
             #username doesn't exist 
-            flash("Incorrect Username and/or Password")
-            return redirect(url_for(
-                "profile", display_name=session['display_name']))
-
+            flash("Account does not exist, please create one")
+            return redirect(url_for("register"))
     return render_template("login.html")
 
 
-@app.route("/profile/<display_name>", methods=["GET", "POST"])
-def profile(display_name):
-    #grab the session user's display-name from the db
-    display_name = mongo.db.users.find_one(
-        {"display_name": session["display_name"]})["display_name"]
-    return render_template("profile.html", display_name=display_name)
+@app.route("/profile/<email>", methods=["GET", "POST"])
+def profile(email):
+    if session["email"]:
+        #grab the session user's display-name from the db
+        d_name = mongo.db.users.find_one(
+            {"email": session["email"]})["display_name"]
+        return render_template("profile.html", display_name=d_name)
+    else:
+        return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookies
+    flash("You have been logged out")
+    session.pop("email")
+    return redirect(url_for("login"))
 
 
 if __name__ == '__main__':

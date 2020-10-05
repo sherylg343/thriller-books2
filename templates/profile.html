@@ -1,5 +1,16 @@
 {% extends "base.html" %} {% block content %}
-
+    <section>
+	<!-- flash messages -->
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        {% for message in messages %}
+	            <div class="row flashes blue lighten-1 white-text text-uppercase">
+		            <h4 class="center-align">{{ message }}</h4>
+	            </div>
+	        {% endfor %}
+	    {% endif %}
+	{% endwith %}
+    </section>
     <div class="row">
 		<div class="col s12 m8 offset-m2">
             <div class="card-panel">

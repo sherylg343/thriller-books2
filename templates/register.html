@@ -4,7 +4,7 @@
 	<!-- flash messages -->
 	{% with messages = get_flashed_messages() %} {% if messages %} {% for message
   in messages %}
-	<div class="row flashes blue lighten-1 white-text text-uppercase">
+	<div class="row flashes red lighten-1 white-text text-uppercase">
 		<h4 class="center-align">{{ message }}</h4>
 	</div>
 	{% endfor %} {% endif %} {% endwith %}
