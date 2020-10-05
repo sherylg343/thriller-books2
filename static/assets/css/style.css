@@ -1,3 +1,7 @@
+:root {
+    --clr-yellow: #FFFD01;
+}
+
 body {
   position: relative;
 }
@@ -99,6 +103,55 @@ h3.section-subheading {
     height: 2rem;
     padding-bottom: 1rem;
     margin-bottom: 0.75rem;
+}
+
+.rating {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotateY(180deg);
+    display: flex;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    display: block;
+    cursor: pointer;
+    width: 20%;
+}
+
+.rating label:before
+{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 25px;
+    color: var(--clr-yellow);
+}
+
+.rating label:after
+{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 25px;
+    color: var(--clr-yellow);
+    top: 0;
+    opacity: 1;
+    transition: .5s;
+    /*text-shadow: 02px 5px rgba(0,0,0,.5);*/
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after ,
+.rating input:checked ~ label:after 
+{
+    opacity: 1;
 }
 /*--------------- Navigation --------------*/
 .brand-logo img {

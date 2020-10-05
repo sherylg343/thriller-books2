@@ -137,14 +137,13 @@ def book_search_results():
 @app.route('/book_profile/<profile_id>')
 def book_profile(profile_id):
     str_profile_id = str(profile_id)
-#    the_book = search_results.get(str_profile_id)
-    print("---------", the_book_)
+    #the_book = search_results.get(str_profile_id)
     return render_template('book_profile.html')
 
 
-@app.route('/book_review_form/<isbn>')
-def book_review_form(isbn):
-    return render_template("book_profile.html")
+@app.route('/book_review_form')
+def book_review_form():
+    return render_template("book_review_form.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
