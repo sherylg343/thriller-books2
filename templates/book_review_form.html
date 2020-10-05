@@ -24,22 +24,23 @@
     <div class="row">
         <form id="review-form" class="col s12" action="{{ url_for('book_review_form') }}" method="POST">
             <div class="row">
-                <div class="col s12">
+                <div class="col s6">
                     <p class="black-text">My Rating:</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12 rating">
-                    <input type="radio" name="star" id="star1"><label for="star1">
-                    </label>
-                    <input type="radio" name="star" id="star2"><label for="star2">
-                    </label>
-                    <input type="radio" name="star" id="star3"><label for="star3">
-                    </label>
-                    <input type="radio" name="star" id="star4"><label for="star4">
-                    </label>
-                    <input type="radio" name="star" id="star5"><label for="star5">
-                    </label>
+                <div class="col s6 center">
+                    <div class="stars">
+                        <input type="radio" id="five" name="rate" value="five"><label for="five">
+                        </label>
+                        <input type="radio" id="four" name="rate" value="four"><label for="four">
+                        </label>
+                        <input type="radio" id="three" name="rate" value="three"><label for="three">
+                        </label>
+                        <input type="radio" id="two" name="rate" value="two"><label for="two">
+                        </label>
+                        <input type="radio" id="one" name="rate" value="one"><label for="one">
+                        </label>
+                        <span class="result"></span>
+                    </div>
                 </div>
             </div>
         </form>
