@@ -158,15 +158,26 @@ def insert_review():
     return render_template('my_book_reviews', display_name=d_name)
 
 
-#@app.route('/my_book_reviews/<display_name>')
-#def my_book_reviews(display_name):
-#    return render_template(
-#        "my_book_reviews.html", reviews=mongo.db.book_reviews.find())
+@app.route('/my_book_reviews')
+def my_book_reviews():
+    d_name = mongo.db.users.find_one(
+        {"email": session["email"]})["display_name"]
+    return render_template(
+        "my_book_reviews.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
+
+
+@app.route('/delete_review/<review_id><display_name>')
+def delete_review(review_id, display_name):
+    mongo.db.tasks.remove({'_id': ObjectId(review_id)})
+    return redirect(url_for(
+        'my_book_reviews', display_name=display_name))
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        # 
+        # print(mongo.db.users.find())
         ## check if username already exists in db
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("reg-email")})
@@ -189,7 +200,7 @@ def register():
                     "create-password")),
                 "display_name": request.form.get("create-display-name").lower()
             }
-            mongo.db.insert_one(register)
+            mongo.db.users.insert_one(register)
 
             #put the new user into the 'session" cookie
             session["email"] = request.form.get("reg-email")
@@ -208,6 +219,8 @@ def login():
 
         if existing_email:
             # ensure hashed password matches user input
+            print(existing_email["password"])
+            print(request.form.get("password"))
             if check_password_hash(
                 existing_email["password"], request.form.get("password")):
                     session["email"] = request.form.get("email").lower()
@@ -217,7 +230,7 @@ def login():
                     flash("Welcome, {}".format(mongo.db.users.find_one(
                         {"email": session["email"]})["display_name"]))
                     return redirect(url_for(
-                        "login", display_name=d_name))
+                        "profile"))
                     
             else:
                 #invalid password match
@@ -231,13 +244,12 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<email>", methods=["GET", "POST"])
-def profile(email):
-    if session["email"]:
-        #grab the session user's display-name from the db
-        d_name = mongo.db.users.find_one(
-            {"email": session["email"]})["display_name"]
-        return render_template("profile.html", display_name=d_name)
+@app.route("/profile/")
+def profile():
+    if session["display_name"]:
+        d_name = session["display_name"]
+        return render_template(
+            "profile.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
     else:
         return render_template("login.html")
 

@@ -1,18 +1,44 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-<div class="row">
-    <div class="input-field col s12">
-        <select multiple>
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select>
-    <label>Materialize Select</label>
-  </div>
-</div>
-</div>
+     <div class="row">
+        <div class="col s12 center-align">
+		    <h2 class="section-heading">{{ book_reviews.display_name }}'s Book Reviews</h2>
+        </div>
+    </div>
+    {% for review in book_reviews %}
+        {% if review.display_name == display_name %}
+        <div class="row">
+            <div class="col s12">
+                <h6>{{ review.title }}, {{ review.date }}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p>My Rating: {{ review.rating }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p>{{ review.description }}</p>
+            </div>
+        </div><div class="row">
+            <div class="col s12">
+                {{% if review.spoiler %}}
+                <p>Spoiler? {{ review.spoiler }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <a href="{{ url_for('/edit_review', review_id=book_reviews._id, display_name=book_reviews.display_name) }}" class="waves-effect waves-light btn btn-small blue">Edit</a>
+            </div>
+            <div class="col s6">
+                <a href="{{ url_for('/delete_review', review_id=book_reviews._id, display_name=book_reviews.display_name) }}" class="waves-effect waves-light btn btn-small red">Delete</a>
+            </div> 
+        </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %} 
 
 <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
