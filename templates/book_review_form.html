@@ -3,7 +3,7 @@
 <div class="container">
      <div class="row">
         <div class="col s12 center-align">
-		    <div class="masthead-heading books">Book Review For </div>
+		    <h2 class="section-heading">Book Review Form</h2>
         </div>
     </div>
     <div class="row">
@@ -14,39 +14,90 @@
 				</div>
 				<div class="card-stacked">
 					<div class="card-content">
-						<p class="card-title black-text"></p>
-						<p class="card-subtitle"></p>
+						<p class="card-title black-text">Book Title</p>
+						<p class="card-subtitle">Book Author</p>
                     </div>
 				</div>
 			</div>
         </div>
     </div>
     <div class="row">
-        <form id="review-form" class="col s12" action="{{ url_for('book_review_form') }}" method="POST">
+        <div class="col s12" id="display-name-header">
+            <h5>Display-Name</h5>
+        </div>
+    </div>
+    <div class="row">
+        <form id="review-form" class="col s12 grey lighten-3" action="{{ url_for('book_review_form') }}" method="POST">
             <div class="row">
-                <div class="col s6">
-                    <p class="black-text">My Rating:</p>
+                <div class="col s12">
+                    <p>required fields are marked with a *</p> 
                 </div>
-                <div class="col s6 center">
-                    <div class="stars">
-                        <input type="radio" id="five" name="rate" value="five"><label for="five">
-                        </label>
-                        <input type="radio" id="four" name="rate" value="four"><label for="four">
-                        </label>
-                        <input type="radio" id="three" name="rate" value="three"><label for="three">
-                        </label>
-                        <input type="radio" id="two" name="rate" value="two"><label for="two">
-                        </label>
-                        <input type="radio" id="one" name="rate" value="one"><label for="one">
-                        </label>
-                        <span class="result"></span>
-                    </div>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>*My Rating(click to rate):</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="container">
+                                <span id="rateMe2"  class="empty-stars"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>*Review Title</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-field">
+                                <input placeholder="title" id="review-title" name="review-title" type="text" class="validate">
+                                <label for="review-title"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>*Review</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-field">
+                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" placeholder="Enter your review here"></textarea>
+                                <label for="review-textarea"></label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Does your review container spoilers?</td>
+                        <td>
+                            <div class="input-field">
+                                <select id="spoiler" name="spoiler">
+                                    <option value="" disabled selected>Choose . . .</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                                <label for="spoiler"></label>
+                            </div>           
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row btn-row">
+                <div class="col s12 btn-col center-align">
+                    <button class="btn-large black-text yellow" type="submit" name="action">Submit Review
+                        <i class="material-icons right">add_box</i>
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}
 

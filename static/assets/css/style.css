@@ -4,7 +4,12 @@
 
 :root {
     --clr-yellow: #FFFD01;
+    --clr-ltgray: #d3d3d3;
+    --clr-gray: #808080;
+    --clr-gold: #FFDF00;
+    --clr-metallicgold: #D4AF37;
 }
+
 
 body {
   position: relative;
@@ -83,6 +88,15 @@ h3.section-subheading {
     margin-top: -8rem;
 }
 
+.btn-row .btn-col {
+    float: none;
+}
+
+#review-form button {
+    margin: 2rem;
+    text-align: center;
+}
+
 /*--------------- Inputs --------------*/
 .input-field input[type=search] {
     height: 2.6rem;
@@ -109,53 +123,34 @@ h3.section-subheading {
     margin-bottom: 0.75rem;
 }
 
-.center {
-    position: absolute;
-/*    top: 50%;
-    left: 50%;*/
-    transform: translate(-50%,-50%);
+#search-row {
+    border-bottom: 3px solid #000000;
+    margin-bottom: 10px;
+    height: 5rem;
 }
 
-.rating input {
-    display: none;
+table {
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #d4d4d4;
+  font-size: 20px;
+  background: #fff;
+}
+  
+table th, 
+table td {
+  padding: 20px 50px;
+}
+  
+table th {
+  border-bottom: 1px solid #d4d4d4;
 }
 
-.rating label {
-    display: block;
-    cursor: pointer;
-    width: 2.5rem;
+#review-form table td input {
+    width: 100%;
 }
 
-.rating label:before
-{
-    content: '\f005';
-    font-family: fontAwesome;
-    position: relative;
-    display: block;
-    font-size: 18px;
-    color: var(--clr-yellow);
-}
-
-.rating label:after
-{
-    content: '\f005';
-    font-family: fontAwesome;
-    position: relative;
-    display: block;
-    font-size: 18px;
-    color: var(--clr-yellow);
-    top: 0;
-    opacity: 1;
-    transition: .5s;
-    text-shadow: 02px 5px rgba(0,0,0,.5);
-}
-
-.rating label:hover:after,
-.rating label:hover ~ label:after ,
-.rating input:checked ~ label:after 
-{
-    opacity: 1;
-}
 /*--------------- Navigation --------------*/
 .brand-logo img {
   display: inline-block;
