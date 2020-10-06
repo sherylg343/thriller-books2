@@ -134,13 +134,13 @@ table {
   text-align: center;
   border-collapse: collapse;
   border: 1px solid #d4d4d4;
-  font-size: 20px;
+  font-size: 11px;
   background: #fff;
 }
   
 table th, 
 table td {
-  padding: 20px 50px;
+  padding: .75rem 1rem;
 }
   
 table th {
@@ -149,6 +149,14 @@ table th {
 
 #review-form table td input {
     width: 100%;
+}
+
+#ratings-summary #reader-ratings {
+    font-size: .75rem;
+}
+
+.spacer {
+    height: 1.5rem;
 }
 
 /*--------------- Navigation --------------*/
@@ -282,6 +290,9 @@ table th {
     #search-form .input-field>label {
         font-size: 1rem;
     }
+    table {
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -326,6 +337,9 @@ table th {
     }
     #search-form .input-field>label {
         font-size: 1rem;
+    }
+    table {
+        font-size: 16px;
     }
 }
 

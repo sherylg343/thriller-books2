@@ -133,17 +133,35 @@ def book_search_results():
     print("------------", json_data)
     return render_template('book_search_results.html', results=book_data)
 
-
-@app.route('/book_profile/<profile_id>')
-def book_profile(profile_id):
-    str_profile_id = str(profile_id)
+ 
+#will need to carry isbn from book from book search page
+@app.route('/book_profile')
+def book_profile():
+    #str_profile_id = str(profile_id)
     #the_book = search_results.get(str_profile_id)
     return render_template('book_profile.html')
 
 
 @app.route('/book_review_form')
 def book_review_form():
-    return render_template("book_review_form.html")
+    d_name = mongo.db.users.find_one(
+                        {"email": session["email"]})["display_name"]
+    return render_template("book_review_form.html", display_name=d_name)
+
+
+@app.route('/insert_review', methods=["POST"])
+def insert_review():
+    book_reviews = mongo.db.book_reviews
+    book_reviews.insert_one(request.form.to_dict())
+    d_name = mongo.db.users.find_one(
+                        {"email": session["email"]})["display_name"]
+    return render_template('my_book_reviews', display_name=d_name)
+
+
+#@app.route('/my_book_reviews/<display_name>')
+#def my_book_reviews(display_name):
+#    return render_template(
+#        "my_book_reviews.html", reviews=mongo.db.book_reviews.find())
 
 
 @app.route("/register", methods=["GET", "POST"])
