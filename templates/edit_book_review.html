@@ -7,10 +7,10 @@
         </div>
     </div>
     <div class="row">
-        <form id="review-form" class="col s12 grey lighten-3" action="{{ url_for('update_review') }}" method="POST">
+        <form id="review-form" class="col s12 grey lighten-3" action="{{ url_for('update_review', review_id=review._id) }}" method="POST">
             <div class="row">
                 <div class="col s12">
-                    <p>required fields are marked with a *</p> 
+                    <p>required fields are marked with *</p> 
                 </div>
             </div>
             <table>
@@ -19,12 +19,12 @@
                         <th>Display Name:</th>
                     </tr>
                     <tr>
-                        <td>
+                        <th>
                             <div class="input-field">
-                                <input id="display-name" name="display-name" type="text" value="{{ book_reviews.display_name }}">
+                                <input id="display-name" name="display-name" type="text" value="{{ review.display_name }}">
                                 <label for="display-name"></label>
                             </div>
-                        </td>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +34,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="book-title" name="book-title" type="text" value="{{ book_reviews.book_title }}">
+                                <input id="book-title" name="book-title" type="text" value="{{ review.book_title }}">
                                 <label for="book-title"></label>
                             </div>
                         </td>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="isbn" name="isbn" type="text" value="{{ book_reviews.isbn }}">
+                                <input id="isbn" name="isbn" type="text" value="{{ review.isbn }}">
                                 <label for="isbn"></label>
                             </div>
                         </td>
@@ -56,7 +56,7 @@
                     <tr>
                         <td>
                             <div class="container">
-                                <span id="rateMe2"  class="empty-stars" value="{{ book_reviews.rating }}"></span>
+                                <input type="text" name="rating" value="{{ review.rating }}">
                             </div>
                         </td>
                     </tr>
@@ -66,7 +66,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="review-title" name="review-title" type="text" value="{{ book_reviews.review_title }}">
+                                <input id="review-title" name="review-title" type="text" value="{{ review.review_title }}">
                                 <label for="review-title"></label>
                             </div>
                         </td>
@@ -77,7 +77,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" value="{{ book_reviews.review_text }}"></textarea>
+                                <textarea id="review-textarea" name="review-text" class="materialize-textarea">{{ review.review_text }}</textarea>
                                 <label for="review-textarea"></label>
                             </div>
                         </td>
@@ -92,14 +92,14 @@
                             <div class="input-field">
                                 <select id="spoiler" name="spoiler">
                                     {% for review in book_reviews %}
-                                       {% if book_reviews.spoiler == "" %} 
-                                    <option value="" disabled selected>Choose . . .</option>
-                                        {% elif book_reviews.spoiler == "No" %}
-                                    <option value="no" selected>No</option>
+                                        {% if review.spoiler == "" %} 
+                                            <option value="" selected>Choose . . .</option>
+                                        {% elif review.spoiler == "No" %}
+                                            <option value="no" selected>No</option>
                                         {% else %}
-                                    <option value="yes" selected>Yes</option>
+                                            <option value="yes" selected>Yes</option>
                                         {% endif %}
-                                    {%% endfor }
+                                    {% endfor %}
                                 </select>
                                 <label for="spoiler"></label>
                             </div>           
@@ -109,7 +109,7 @@
             </table>
             <div class="row btn-row">
                 <div class="col s12 btn-col center-align">
-                    <button class="btn-large black-text yellow" type="submit" name="action">Edit Review
+                    <button class="btn-large black-text yellow" type="submit" name="action">Submit Edit
                         <i class="material-icons right">add_box</i>
                     </button>
                 </div>
@@ -119,5 +119,6 @@
 </div>
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 {% endblock %}

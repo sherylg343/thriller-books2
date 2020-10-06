@@ -162,15 +162,41 @@ def insert_review():
 def my_book_reviews():
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
+    book_reviews=mongo.db.book_reviews.find()
     return render_template(
-        "my_book_reviews.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
+        'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 
 
-@app.route('/delete_review/<review_id><display_name>')
-def delete_review(review_id, display_name):
+@app.route('/edit_book_review/<review_id>')
+def edit_book_review(review_id):
+    the_review = mongo.db.book_reviews.find_one({"_id": ObjectId(review_id)})
+    return render_template(
+        'edit_book_review.html', review=the_review)
+
+
+@app.route('/update_review/<review_id>', methods=["POST"])
+def update_review(review_id):
+    reviews = mongo.db.book_reviews
+    reviews.updateOne({'_id': ObjectId(review_id)},
+    {
+        'isbn': request.form.get('isbn'),
+        'book_title': request.form.get('book-title'),
+        'display_name': request.form.get('display-name'),
+        'rating': request.form.get('rating'),
+        'review_title': request.form.get('review-title'),
+        'review_text': request.form.get('review-text'),
+        'spoiler': request.form.get('spoiler')
+    })
+    return render_template('my_book_reviews.html')
+
+
+@app.route('/delete_review/<review_id>')
+def delete_review(review_id):
+    d_name = mongo.db.users.find_one(
+        {"email": session["email"]})["display_name"]
     mongo.db.tasks.remove({'_id': ObjectId(review_id)})
     return redirect(url_for(
-        'my_book_reviews', display_name=display_name))
+        'my_book_reviews', display_name=d_name))
 
 
 @app.route("/register", methods=["GET", "POST"])

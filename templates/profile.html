@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <ul class="book-list">
+            <ul id="book-list">
                 {% for review in book_reviews %} {% if review.display_name == display_name %}
                     <li class="center-align">{{ review.book_title }}, reviewed on {{ review.date }}</li>
                  {% endif %} {% endfor %}
@@ -24,6 +24,8 @@
         <div class="col-sm-12 pb-5 center-align">
             <p>
                 Looking for your Book Reviews?
+            </p>
+            <p>
                 <a href="{{ url_for('my_book_reviews') }}">
                 Click here to see them</a>
              </p>

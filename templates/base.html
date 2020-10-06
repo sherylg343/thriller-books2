@@ -20,8 +20,8 @@
 <body data-spy="scroll" data-target="nav-parent">
 <!-- Nav Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content black yellow-text">
-        {% if session.user %}
-            <li><a href="#" class="yellow-text">My Book Reviews</a></li>
+        {% if session.email %}
+            <li><a href="{{ url_for('my_book_reviews') }}" class="white-text">My Book Reviews</a></li>
             <li><a href="{{ url_for('profile') }}" class="white-text">My Profile</a></li>
             <li><a href="{{ url_for('logout') }}" class="white-text">Log Out</a></li>
         {% else %}
@@ -46,8 +46,8 @@
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('get_home') }}" class="black-text">Home</a></li>
         <li><a href="#featured" class="black-text">Featured Books</a></li>
-       {% if session.user %}
-            <li><a href="" class="black-text">My Book Reviews</a></li>
+       {% if session.email %}
+            <li><a href="{{ url_for('my_book_reviews') }}" class="black-text">My Book Reviews</a></li>
             <li><a href="{{ url_for('profile') }}" class="black-text">My Profile</a></li>
             <li><a href="{{ url_for('logout') }}" class="black-text">Log Out</a></li>
         {% else %}
