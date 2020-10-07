@@ -41,7 +41,7 @@ def get_feature_image():
                 response = requests.get(url)
                 response.raise_for_status()
                 json_response = response.json()
-                outfile = open('json-api1.json', 'w')
+                outfile = open('books.json', 'w')
                 outfile.write(json_response)
                 outfile.close()
                 source = "json-api1.json"

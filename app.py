@@ -72,66 +72,32 @@ def get_feature_image():
 
             except Exception as err:
                 print(f'Other error occurred: {err}')
-
-
-
-@app.route("/search_api", methods=["GET", "POST"])
-def search_api():
-    if os.path.exists("books.json"):
-        os.remove("books.json")
-    search_text = request.form.get('search')
-    search_text_formatted = search_text.replace(" ", "+")
-    search_type = request.form.get('search-type')
-    search_type_formatted = "in" + search_type + ":"
-    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text_formatted + search_type_formatted + '&key=' + API_KEY
-    try: 
-        response = requests.get(url)
-        response.raise_for_status()
-        j2_response = response.json()
-        if j2_response:
-            j2_len = len(j2_response)
-            search_results = {}
-            for x in range(j2_len):          
-                title = str(j2_response["items"][x]["volumeInfo"]["title"])
-                author = str(j2_response["items"][x]["volumeInfo"]["authors"][0])
-                sm_image = str(j2_response['items'][x]['volumeInfo']['imageLinks']['smallThumbnail'])
-                pub_date = str(j2_response['items'][x]['volumeInfo']['publishedDate'])
-                descrip = str(j2_response['items'][x]['volumeInfo']['description'])
-                isbn2 = str(j2_response['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'])
-                _id = str(ObjectId())
-                loop_data = {}
-                loop_data = { 
-                    'book':  {'id': _id, 'isbn': isbn2, 'title': title, 'author' : author,'image': sm_image, 'publication_date': pub_date, 'description': descrip}        
-                }
-                search_results.update(loop_data)
-            #save search results to json file move to json directory for access later
-            json_data = json.dumps(search_results)
-            f = open("books.json", "w")
-            f.write(json_data)
-            f.close()
-#           source = "books.json"I hav
-#            destination = "data"
-#            new_path = shutil.move(source, destination)
-#            print("------------", new_path)
-        else:
-            flash("Search returned no results, please change your search terms and try again.")
-            
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-        
-    except Exception as err:
-        print(f'Other error occurred: {err}')
-        
-    return render_template('book_search_results.html')
-
-
-@app.route('/book_search_results')
+                
+                
+@app.route('/book_search_results', methods=["GET", "POST"])
 def book_search_results():
-    book_data = []
-    with open("books.json", "r") as json_data:
-        book_data = json.load(json_data)
-    print("------------", json_data)
-    return render_template('book_search_results.html', results=book_data)
+    if request.method == "POST":
+        search_text = request.form.get('search')
+        search_text_formatted = search_text.replace(" ", "+")
+        search_type = request.form.get('search-type')
+        search_type_formatted = "in" + search_type + ":"
+        print("-------", search_text_formatted)
+        print("-------", search_type_formatted)
+        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text_formatted + search_type_formatted + '&key=' + API_KEY
+        try: 
+            response = requests.get(url)
+            response.raise_for_status()
+            j2_response = response.json()
+            print("--------", j2_response)
+
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+        
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+        
+    return render_template(
+        'book_search_results.html', results=j2_response)
 
  
 #will need to carry isbn from book from book search page
@@ -155,7 +121,7 @@ def insert_review():
     book_reviews.insert_one(request.form.to_dict())
     d_name = mongo.db.users.find_one(
                         {"email": session["email"]})["display_name"]
-    return render_template('my_book_reviews', display_name=d_name)
+    return render_template('my_book_reviews.html', display_name=d_name)
 
 
 @app.route('/my_book_reviews')

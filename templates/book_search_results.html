@@ -10,21 +10,22 @@
 			<div class="col s12 m7">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ book.image }}">
+						<img class="activator" src="{{ book['items'][x]['volumeInfo']['imageLinks']['smallThumbnail']  }}">
 					</div>
 					<div class="card-stacked">
 						<div class="card-content">
-							<span class="card-title activator black-text">{{ book.title }}
+							<span class="card-title activator black-text">{{ book['items'][x]['volumeInfo']['title'] }}
 							    <i class="material-icons right">more_vert</i></span>
-							<p class="card-subtitle">{{ book.author }}</p>
+							<p class="card-subtitle">{{ book['items'][x]['volumeInfo']['author'][0] }}</p>
                         </div>
 						<div class="card-action">
-							<a href="(( url_for('book_profile') }}">Book Profile & Reviews</a>
+							<a href="(( url_for('book_profile', isbn=book['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier']) }}">Book Profile & Reviews</a>
 						</div>
 					</div>
                     <div class="card-reveal">
-                        <span class="card-title black-text">{{ book.title }}<i class="material-icons right">close</i></span>
-						<p>{{ book.description }}</p>
+                        <span class="card-title black-text">{{ book['items'][x]['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
+						<p>{{ book['items'][x]['volumeInfo']['description'] }}</p>
+                        <p>{{ book['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'] }}</p>
 					</div>
 				</div>
 			</div>

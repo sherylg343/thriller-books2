@@ -69,10 +69,10 @@
     </section>
     <section>
     <div class="row" id="search-row">
-        <form id="search-form" class="col s12" action="{{ url_for('search_api') }}" method="POST">
+        <form id="search-form" class="col s12" action="{{ url_for('book_search_results') }}" method="POST">
             <div class="row">
 			    <div class="input-field white black-text col s4">  
-                    <select id="search-type" name="search-type"  required>
+                    <select id="search-type" class="black-text" name="search-type"  required>
                         <option value="" class="black-text" disabled selected>Search criteria</option>
                         <option value="author" class="black-text">Author</option>
                         <option class="black-text" value="title">Title</option>

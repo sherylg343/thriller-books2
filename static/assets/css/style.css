@@ -115,6 +115,8 @@ h3.section-subheading {
 
 #search-form .input-field>label {
     font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: -0.75rem;
 }
 
 #search-form.col.s12 {
