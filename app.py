@@ -103,11 +103,13 @@ def book_profile(volume_id):
     reviews = mongo.db.book_reviews.find()
     volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
     volume_full_url = volume_base_url + volume_id
+    print("---------", volume_full_url)
     try: 
         vol_response = requests.get(volume_full_url)
         vol_response.raise_for_status()
         #convert json response into Python data
-        vol_response = response.json()
+        vol_response = vol_response.json()
+        print('--------', vol_response)
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
@@ -116,7 +118,7 @@ def book_profile(volume_id):
         print(f'Other error occurred: {err}')
 
     return render_template(
-        'book_profile.html', books=vol_response, reviews=reviews)
+        'book_profile.html', book=vol_response, reviews=reviews)
 
 
 @app.route('/book_review_form')
@@ -139,7 +141,7 @@ def insert_review():
 def my_book_reviews():
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
-    book_reviews=mongo.db.book_reviews.find()
+    book_reviews = mongo.db.book_reviews.find()
     return render_template(
         'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 

@@ -22,8 +22,8 @@
                             <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
                         </div>
 						<div class="card-action">
-							<a href="(( url_for('book_profile', volume_id=book['id'] }}">View Book Profile & Reviews</a>
-                            <a href="(( url_for('book_review_form', volume_id=book['id'] }}">Write A Review</a>
+							<a href="{{ url_for('book_profile', volume_id=book['id']) }}">View Book Profile & Reviews</a>
+                            <a href="{{ url_for('book_review_form', volume_id=book['id']) }}">Write A Review</a>
 						</div>
 					</div>
                     <div class="card-reveal">

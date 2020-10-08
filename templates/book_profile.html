@@ -3,44 +3,36 @@
 <section>
 	<div class=" row center-align">
         <div class="col s12">
-			<h2 class="text-uppercase section-heading">Search Results</h2>
+			<h2 class="text-uppercase section-heading">Book Profile</h2>
 		</div>
 	</div>   	
 	<div class="card-container">
-        {% for book in books['items'] %}
 			<div class="col s12">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+                    {% if book['volumeInfo']['imageLinks'] %}
+						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" alt="no image available">
+                    {% endif %}
 					</div>
 				    <div class="card-stacked">
 						<div class="card-content">
-							<span class="card-title activator black-text">{{ book['volumeInfo']['title']}}<i class="material-icons right">more_vert</i></span>
+							<span class="card-title black-text">{{ book['volumeInfo']['title']}}</span>
                         {% for author in book['volumeInfo']['authors'] %}
 							<p class="card-subtitle">{{ author }}</p>
                         {% endfor %}
                             <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
                         </div>
 						<div class="card-action">
-							<a href="(( url_for('book_profile', volume_id=book['id'] }}">View Book Profile & Reviews</a>
-                            <a href="(( url_for('book_review_form', volume_id=book['id'] }}">Write A Review</a>
+							<a href="{{ url_for('book_profile', volume_id=book['id']) }}">View Book Profile & Reviews</a>
+                            <a href="{{ url_for('book_review_form', volume_id=book['id']) }}">Write A Review</a>
 						</div>
-					</div>
-                    <div class="card-reveal">
-                        <span class="card-title black-text">{{ book['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
-						<p>{{ book['volumeInfo']['description'] }}</p>
-                        <p> Looking for more information about this book?</p>
-                        <a src="{{ book['volumeInfo']['infoLink'] }}">View Google's Book Profile</a>
 					</div>
 				</div>
 			</div>
-        {% endfor %}
 	</div>
-</section>
-<section>
     <div class="row">
-        <div class="col s12">
-             <p>Book Description</p>
+        <div class="col s10 m8 center-align">
+             <p class="center-align">{{ book['volumeInfo']['description'] }}</p>
         </div>
     </div>
     <div class="row">
@@ -49,9 +41,11 @@
              <a src="{{ book['volumeInfo']['infoLink'] }}" target="_blank">Google's Book Profile</a>
         </div>
     </div>
+</section>
+<section>
     <div class="row">
         <div class="col s12">
-             <h6>Book Reviews</h6>
+             <h4>Book Reviews</h4>
         </div>
     </div>
 {% for review in reviews %}
