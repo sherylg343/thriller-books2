@@ -197,13 +197,10 @@ table th {
     top: 40vh;
 }
 
-.featured {
-    position: absolute;
-    margin-top: -5rem;
-}
-
-.card-container.books {
+.card-container {
     margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 15%;
 }
 
 .footer {

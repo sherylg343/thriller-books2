@@ -1,39 +1,61 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container">
-     <div class="row">
-        <div class="col s12 center-align">
-		    <h2 class="section-heading">Book Profile</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12 center-align">
-			<div class="card horizontal hoverable">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="#">
-				</div>
-				<div class="card-stacked">
-			<div class="card-content">
-				<span class="card-title activator black-text">
-                   <i class="material-icons right">more_vert</i>
-                </span>
-				<p class="card-subtitle"></p>
-                <p class="card-subtitle"></p>
-            </div>
+<section>
+	<div class=" row center-align">
+        <div class="col s12">
+			<h2 class="text-uppercase section-heading">Search Results</h2>
 		</div>
+	</div>   	
+	<div class="card-container">
+        {% for book in books['items'] %}
+			<div class="col s12">
+				<div class="card horizontal hoverable">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+					</div>
+				    <div class="card-stacked">
+						<div class="card-content">
+							<span class="card-title activator black-text">{{ book['volumeInfo']['title']}}<i class="material-icons right">more_vert</i></span>
+                        {% for author in book['volumeInfo']['authors'] %}
+							<p class="card-subtitle">{{ author }}</p>
+                        {% endfor %}
+                            <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
+                        </div>
+						<div class="card-action">
+							<a href="(( url_for('book_profile', volume_id=book['id'] }}">View Book Profile & Reviews</a>
+                            <a href="(( url_for('book_review_form', volume_id=book['id'] }}">Write A Review</a>
+						</div>
+					</div>
+                    <div class="card-reveal">
+                        <span class="card-title black-text">{{ book['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
+						<p>{{ book['volumeInfo']['description'] }}</p>
+                        <p> Looking for more information about this book?</p>
+                        <a src="{{ book['volumeInfo']['infoLink'] }}">View Google's Book Profile</a>
+					</div>
+				</div>
+			</div>
+        {% endfor %}
 	</div>
+</section>
+<section>
     <div class="row">
         <div class="col s12">
              <p>Book Description</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col s12">
+             <p>Looking for more information about this book?</p>
+             <a src="{{ book['volumeInfo']['infoLink'] }}" target="_blank">Google's Book Profile</a>
+        </div>
     </div>
     <div class="row">
         <div class="col s12">
              <h6>Book Reviews</h6>
         </div>
     </div>
-    <!--Iterate through reviews here-->
+{% for review in reviews %}
+    {% if volume_id == review.volume_id %}
     <table id="ratings-summary">
         <tbody>
             <tr>
@@ -48,16 +70,29 @@
     <table id="reader-ratings">
         <tbody>
             <tr>
-                <td>Display Name rated it</td>
-                <td>Star rating</td>
+                <td>{{ review.display_name }} rated it:</td>
+                <td>{{ review.rating }}</td>
+            </tr>
+            <tr>
+                <td>{{ review.date }}</td>
             </tr>
         </tbody>
     </table>
     <div class="row">
         <div class="col s12">
-            <p>Book Review Copy</p>
+            <p>{{ review.review_text }}</p>
         </div>
     </div>
-                    
+    <div class="row spacer">
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>Spoiler?  {{ review.spoiler }}</p>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
+</section>                   
 {% endblock %}
             

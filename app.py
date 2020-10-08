@@ -81,14 +81,12 @@ def book_search_results():
         search_text_formatted = search_text.replace(" ", "+")
         search_type = request.form.get('search-type')
         search_type_formatted = "in" + search_type + ":"
-        print("-------", search_text_formatted)
-        print("-------", search_type_formatted)
-        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_text_formatted + search_type_formatted + '&key=' + API_KEY
+        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
         try: 
             response = requests.get(url)
             response.raise_for_status()
+            #convert json response into Python data
             j2_response = response.json()
-            print("--------", j2_response)
 
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
@@ -97,15 +95,28 @@ def book_search_results():
             print(f'Other error occurred: {err}')
         
     return render_template(
-        'book_search_results.html', results=j2_response)
+        'book_search_results.html', books=j2_response)
 
  
-#will need to carry isbn from book from book search page
-@app.route('/book_profile')
-def book_profile():
-    #str_profile_id = str(profile_id)
-    #the_book = search_results.get(str_profile_id)
-    return render_template('book_profile.html')
+@app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
+def book_profile(volume_id):
+    reviews = mongo.db.book_reviews.find()
+    volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
+    volume_full_url = volume_base_url + volume_id
+    try: 
+        vol_response = requests.get(volume_full_url)
+        vol_response.raise_for_status()
+        #convert json response into Python data
+        vol_response = response.json()
+
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+        
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+
+    return render_template(
+        'book_profile.html', books=vol_response, reviews=reviews)
 
 
 @app.route('/book_review_form')

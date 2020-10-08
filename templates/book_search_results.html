@@ -1,35 +1,37 @@
 {% extends 'base.html' %} {% block content %}
 
-<section id="featured" class="featured">
-	<div class="container">
-		<div class="center-align">
+<section>
+	<div class=" row center-align">
+        <div class="col s12">
 			<h2 class="text-uppercase section-heading">Search Results</h2>
 		</div>
-        {% for book in results %}	
-		<div class="card-container">
-			<div class="col s12 m7">
+	</div>   	
+	<div class="card-container">
+        {% for book in books['items'] %}
+			<div class="col s12">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ book['items'][x]['volumeInfo']['imageLinks']['smallThumbnail']  }}">
+						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
 					</div>
-					<div class="card-stacked">
+				    <div class="card-stacked">
 						<div class="card-content">
-							<span class="card-title activator black-text">{{ book['items'][x]['volumeInfo']['title'] }}
-							    <i class="material-icons right">more_vert</i></span>
-							<p class="card-subtitle">{{ book['items'][x]['volumeInfo']['author'][0] }}</p>
+							<span class="card-title activator black-text">{{ book['volumeInfo']['title']}}<i class="material-icons right">more_vert</i></span>
+                        {% for author in book['volumeInfo']['authors'] %}
+							<p class="card-subtitle">{{ author }}</p>
+                        {% endfor %}
+                            <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
                         </div>
 						<div class="card-action">
-							<a href="(( url_for('book_profile', isbn=book['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier']) }}">Book Profile & Reviews</a>
+							<a href="(( url_for('book_profile', volume_id=book['id'] }}">View Book Profile & Reviews</a>
+                            <a href="(( url_for('book_review_form', volume_id=book['id'] }}">Write A Review</a>
 						</div>
 					</div>
                     <div class="card-reveal">
-                        <span class="card-title black-text">{{ book['items'][x]['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
-						<p>{{ book['items'][x]['volumeInfo']['description'] }}</p>
-                        <p>{{ book['items'][x]['volumeInfo']['industryIdentifiers'][0]['identifier'] }}</p>
+                        <span class="card-title black-text">{{ book['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
+						<p>{{ book['volumeInfo']['description'] }}</p>
 					</div>
 				</div>
 			</div>
-		</div>
         {% endfor %}
 	</div>
 </section>
