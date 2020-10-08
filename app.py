@@ -40,40 +40,46 @@ def get_home():
 @app.route('/')
 @app.route('/get_feature_image')
 def get_feature_image():
-    check_images = mongo.db.feature_books.find()
-    for image in check_images:
-        if image["image"] == "":
-            isbn = image["isbn"]
-            url = 'https://www.googleapis.com/books/v1/volumes?q=' + isbn + ":isbn" + '&key=' + API_KEY
+    check_books = mongo.db.feature_books.find()
+    for book in check_books:
+        if (book["image"] == "") or (book["volume_id"] == ""):
+            isbn = book["isbn"]
+            title = book['title']
+            title_formatted = title.replace(" ", "+")
+            author = book['author']
+            author_formatted = author.replace(" ", "+")
+            url = 'https://www.googleapis.com/books/v1/volumes?q=' + "intitle:" + title_formatted + "+" + "inauthor:" + author_formatted + '&key=' + API_KEY
         # from pynative.com/parse-json-response-
-        # #using-python-requests-library/
+        # using-python-requests-library/
             try:
                 response = requests.get(url)
                 response.raise_for_status()
                 j_response = response.json()
-
                 for x in range(1):
-                    cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+                    cover_img = j_response['items'][x]['volumeInfo']['imageLinks']['thumbnail']
+                    vol_id = j_response['items'][x]['id']
+                    (print("--------", cover_img, vol_id))
                     str_cover = str(cover_img)
                     str_isbn = str(isbn)
+                    str_id = str(vol_id)
 
-                    mongo.db.feature_books.update_one( 
-                        { 'isbn' : str_isbn },
-                        { '$set' :
-                            { 
-                             'image' : str_cover 
-                             }
+                    mongo.db.feature_books.update_one(
+                        {'isbn': str_isbn},
+                        {'$set':
+                            {
+                                'image': str_cover,
+                                'volume_id': str_id
+                            }
                         }
                     )
-
 
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')
 
             except Exception as err:
                 print(f'Other error occurred: {err}')
-                
-                
+
+
 @app.route('/book_search_results', methods=["GET", "POST"])
 def book_search_results():
     if request.method == "POST":
@@ -81,39 +87,38 @@ def book_search_results():
         search_text_formatted = search_text.replace(" ", "+")
         search_type = request.form.get('search-type')
         search_type_formatted = "in" + search_type + ":"
-        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
-        try: 
+        url = 'https://www.googleapis.com/books/v1/volumes?q=' + \
+            search_type_formatted + search_text_formatted + '&key=' + API_KEY
+        try:
             response = requests.get(url)
             response.raise_for_status()
-            #convert json response into Python data
+            # convert json response into Python data
             j2_response = response.json()
 
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
-        
+
         except Exception as err:
             print(f'Other error occurred: {err}')
-        
+
     return render_template(
         'book_search_results.html', books=j2_response)
 
- 
+
 @app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
 def book_profile(volume_id):
     reviews = mongo.db.book_reviews.find()
     volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
     volume_full_url = volume_base_url + volume_id
-    print("---------", volume_full_url)
-    try: 
+    try:
         vol_response = requests.get(volume_full_url)
         vol_response.raise_for_status()
-        #convert json response into Python data
+        # convert json response into Python data
         vol_response = vol_response.json()
-        print('--------', vol_response)
-
+        
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
-        
+
     except Exception as err:
         print(f'Other error occurred: {err}')
 
@@ -124,7 +129,7 @@ def book_profile(volume_id):
 @app.route('/book_review_form')
 def book_review_form():
     d_name = mongo.db.users.find_one(
-                        {"email": session["email"]})["display_name"]
+        {"email": session["email"]})["display_name"]
     return render_template("book_review_form.html", display_name=d_name)
 
 
@@ -133,7 +138,7 @@ def insert_review():
     book_reviews = mongo.db.book_reviews
     book_reviews.insert_one(request.form.to_dict())
     d_name = mongo.db.users.find_one(
-                        {"email": session["email"]})["display_name"]
+        {"email": session["email"]})["display_name"]
     return render_template('my_book_reviews.html', display_name=d_name)
 
 
@@ -157,7 +162,7 @@ def edit_book_review(review_id):
 def update_review(review_id):
     reviews = mongo.db.book_reviews
     reviews.updateOne({'_id': ObjectId(review_id)},
-    {
+                      {
         'isbn': request.form.get('isbn'),
         'book_title': request.form.get('book-title'),
         'display_name': request.form.get('display-name'),
@@ -181,9 +186,9 @@ def delete_review(review_id):
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        # 
+        #
         # print(mongo.db.users.find())
-        ## check if username already exists in db
+        # check if username already exists in db
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("reg-email")})
         existing_display_name = mongo.db.users.find_one(
@@ -192,11 +197,11 @@ def register():
 
         if existing_email:
             flash("Email already exists")
-            return redirect({{ url_for("register") }})
+            return redirect({{url_for("register")}})
 
         elif existing_display_name:
             flash("Display Name already exists")
-            return redirect({{ url_for("register") }})
+            return redirect({{url_for("register")}})
 
         else:
             register = {
@@ -207,7 +212,7 @@ def register():
             }
             mongo.db.users.insert_one(register)
 
-            #put the new user into the 'session" cookie
+            # put the new user into the 'session" cookie
             session["email"] = request.form.get("reg-email")
             session['display_name'] = request.form.get("display_name")
             flash("Account Creation Successful")
@@ -218,7 +223,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        ## check if username already exists in db
+        # check if username already exists in db
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
@@ -227,23 +232,23 @@ def login():
             print(existing_email["password"])
             print(request.form.get("password"))
             if check_password_hash(
-                existing_email["password"], request.form.get("password")):
-                    session["email"] = request.form.get("email").lower()
-                    d_name = mongo.db.users.find_one(
-                        {"email": session["email"]})["display_name"]
-                    session["display_name"] =  d_name
-                    flash("Welcome, {}".format(mongo.db.users.find_one(
-                        {"email": session["email"]})["display_name"]))
-                    return redirect(url_for(
-                        "profile"))
-                    
+                    existing_email["password"], request.form.get("password")):
+                session["email"] = request.form.get("email").lower()
+                d_name = mongo.db.users.find_one(
+                    {"email": session["email"]})["display_name"]
+                session["display_name"] = d_name
+                flash("Welcome, {}".format(mongo.db.users.find_one(
+                    {"email": session["email"]})["display_name"]))
+                return redirect(url_for(
+                    "profile"))
+
             else:
-                #invalid password match
+                # invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
 
         else:
-            #username doesn't exist 
+            # username doesn't exist
             flash("Account does not exist, please create one")
             return redirect(url_for("register"))
     return render_template("login.html")

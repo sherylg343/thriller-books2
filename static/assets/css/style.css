@@ -4,10 +4,12 @@
 
 :root {
     --clr-yellow: #FFFD01;
-    --clr-ltgray: #d3d3d3;
+    --clr-ltgray: #e0e0e0;
     --clr-gray: #808080;
+    --clr-darkgray: #616161;
     --clr-gold: #FFDF00;
     --clr-metallicgold: #D4AF37;
+    --clr-darkteal: #006666;
 }
 
 
@@ -186,6 +188,8 @@ table th {
 .flashes h4 {
     line-height: 2;
     font-size: 1.2rem;
+    background-color: var(--clr-darkteal);
+    color: white;
 }
 
 /*--------------- Sections --------------*/
@@ -201,6 +205,10 @@ table th {
     margin-left: 15%;
     margin-right: 15%;
     margin-bottom: 15%;
+}
+
+#book-profile {
+    background-color: var(--clr-ltgray);
 }
 
 .footer {
@@ -244,9 +252,6 @@ table th {
     .masthead-heading.books {
         margin-left: 35%;
     }
-    .featured {
-        margin-left: 10%;
-    }
     #mast-link {
         margin-top: -11rem;
     }
@@ -266,10 +271,6 @@ table th {
         margin-top: -18rem;
         margin-left: 8%;
         margin-right: 14%;
-    }
-   
-    .featured {
-        margin-left: 20%;
     }
     #mast-link {
         margin-top: -11rem;
@@ -313,12 +314,6 @@ table th {
         line-height: 3.5rem;
         margin-top: -24rem;
         margin-left: 1%;
-    }
-    .featured {
-        margin-left: 20%;
-    }
-    .featured.container {
-        width: 80%;
     }
     #mast-link {
         margin-top: -17rem;

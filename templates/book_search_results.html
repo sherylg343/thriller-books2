@@ -11,7 +11,9 @@
 			<div class="col s12">
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
+                    {% if book['volumeInfo']['imageLinks'] %}
 						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+                    {% endif %}
 					</div>
 				    <div class="card-stacked">
 						<div class="card-content">
