@@ -6,7 +6,7 @@
 			<h2 class="text-uppercase section-heading">Search Results</h2>
 		</div>
 	</div> 
-    {% for book in books %}
+    {% for book in books['items'] %}
 	<div class="card-container">
         {% for book in books['items'] %}
 			<div class="col s12">
@@ -23,7 +23,7 @@
 							<p class="card-subtitle">{{ author }}</p>
                         {% endfor %}
                             <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
-                             <p><a href="(( url_for('book_profile', volume_id=book.volume_id) }}">Book Profile & Reviews</a></p>
+                             <p><a href="{{ url_for('book_profile', volume_id=book['id']) }}">Book Profile & Reviews</a></p>
                         </div>
 						<div class="card-action">
                             <a href="{{ url_for('book_review_form', volume_id=book['id']) }}">Write A Review</a>      
@@ -32,6 +32,7 @@
                     <div class="card-reveal">
                         <span class="card-title black-text">{{ book['volumeInfo']['title'] }}<i class="material-icons right">close</i></span>
 						<p>{{ book['volumeInfo']['description'] }}</p>
+                        <p>{{ book['id'] }}</p>
 					</div>
 				</div>
 			</div>

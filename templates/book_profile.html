@@ -34,7 +34,7 @@
             <div class="card white">
                 <div class="card-content black-text">
                     <span class="card-title">Description</span>
-                    <p>{{ book['volumeInfo']['description'] }}</p>
+                    <p>{{ book['volumeInfo']['description']| safe }}</p>
                     <p class="spacer"></p>
                     <p >Looking for more information about this book?</p>
                     <a src="{{ book['volumeInfo']['infoLink'] }}" target="_blank">Google's Book Profile</a>

@@ -106,10 +106,10 @@ def book_search_results():
 @app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
 def book_profile(volume_id):
     reviews = mongo.db.book_reviews.find({'volume_id': volume_id})
-    print("----------", reviews)
-    if not reviews:
-        flash(
-            "No reviews have been written yet for this book. Consider writing one if you've already read the book.")    
+    reviews_list = True if len(list(reviews)) else False
+    if not reviews_list:
+        print("---------------empty")
+        flash("No reviews have been written yet for this book. Consider writing one if you've read the book.")
     volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
     volume_full_url = volume_base_url + volume_id
     try:
