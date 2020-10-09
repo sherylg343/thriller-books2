@@ -183,16 +183,19 @@ def update_review(review_id):
     book_reviews = mongo.db.book_reviews.find()
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
-    reviews.update({'_id': ObjectId(review_id)},
-                      {
-        'isbn': request.form.get('isbn'),
-        'book_title': request.form.get('book-title'),
-        'display_name': request.form.get('display-name'),
-        'rating': request.form.get('rating'),
-        'review_title': request.form.get('review-title'),
-        'review_text': request.form.get('review-text'),
-        'spoiler': request.form.get('spoiler')
-    })
+    mongo.db.book_reviews.update_one(
+        {'_id': ObjectId(review_id)},
+        {'$set':
+            {
+                'book_title': request.form.get('book-title'),
+                'rating': request.form.get('rating'),
+                'review_title': request.form.get('review-title'),
+                'review_text': request.form.get('review-text'),
+                'spoiler': request.form.get('spoiler')
+            }
+        }
+    )
+
     return render_template(
         'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 
@@ -204,7 +207,7 @@ def delete_review(review_id):
     book_reviews = mongo.db.book_reviews.find()
     mongo.db.tasks.remove({'_id': ObjectId(review_id)})
     return redirect(url_for(
-        'my_book_reviews', display_name=d_name, book_reviews=book_reviews)
+        'my_book_reviews', display_name=d_name, book_reviews=book_reviews))
 
 
 @app.route("/register", methods=["GET", "POST"])
