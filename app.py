@@ -29,7 +29,7 @@ MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
 
 
 @app.route('/')
-@app.route('/get_home')
+@app.route('/get_home', methods=["GET", "POST"])
 def get_home():
     get_feature_image()
     return render_template(
@@ -37,7 +37,6 @@ def get_home():
         featured=mongo.db.feature_books.find())
 
 
-@app.route('/')
 @app.route('/get_feature_image')
 def get_feature_image():
     check_books = mongo.db.feature_books.find()
@@ -87,8 +86,7 @@ def book_search_results():
         search_text_formatted = search_text.replace(" ", "+")
         search_type = request.form.get('search-type')
         search_type_formatted = "in" + search_type + ":"
-        url = 'https://www.googleapis.com/books/v1/volumes?q=' + \
-            search_type_formatted + search_text_formatted + '&key=' + API_KEY
+        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
         try:
             response = requests.get(url)
             response.raise_for_status()
@@ -107,7 +105,36 @@ def book_search_results():
 
 @app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
 def book_profile(volume_id):
-    reviews = mongo.db.book_reviews.find()
+    reviews = mongo.db.book_reviews.find({'volume_id': volume_id})
+    print("----------", reviews)
+    if not reviews:
+        flash(
+            "No reviews have been written yet for this book. Consider writing one if you've already read the book.")    
+    volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
+    volume_full_url = volume_base_url + volume_id
+    try:
+        vol_response = requests.get(volume_full_url)
+        vol_response.raise_for_status()
+        # convert json response into Python data
+        vol_response = vol_response.json()
+
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+
+    return render_template(
+        'book_profile.html', book=vol_response, reviews=reviews)
+
+
+@app.route('/book_review_form/<volume_id>', methods=["GET", "POST"])
+def book_review_form(volume_id):
+    if not session["email"]:
+        flash("Please log in first prior to writing a review.")
+        return redirect(url_for("login"))
+    d_name = mongo.db.users.find_one(
+        {"email": session["email"]})["display_name"]
     volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
     volume_full_url = volume_base_url + volume_id
     try:
@@ -123,14 +150,7 @@ def book_profile(volume_id):
         print(f'Other error occurred: {err}')
 
     return render_template(
-        'book_profile.html', book=vol_response, reviews=reviews)
-
-
-@app.route('/book_review_form')
-def book_review_form():
-    d_name = mongo.db.users.find_one(
-        {"email": session["email"]})["display_name"]
-    return render_template("book_review_form.html", display_name=d_name)
+        "book_review_form.html", book=vol_response, display_name=d_name)
 
 
 @app.route('/insert_review', methods=["POST"])
@@ -158,10 +178,12 @@ def edit_book_review(review_id):
         'edit_book_review.html', review=the_review)
 
 
-@app.route('/update_review/<review_id>', methods=["POST"])
+@app.route('/update_review/<review_id>', methods=["GET", "POST"])
 def update_review(review_id):
-    reviews = mongo.db.book_reviews
-    reviews.updateOne({'_id': ObjectId(review_id)},
+    book_reviews = mongo.db.book_reviews.find()
+    d_name = mongo.db.users.find_one(
+        {"email": session["email"]})["display_name"]
+    reviews.update({'_id': ObjectId(review_id)},
                       {
         'isbn': request.form.get('isbn'),
         'book_title': request.form.get('book-title'),
@@ -171,16 +193,18 @@ def update_review(review_id):
         'review_text': request.form.get('review-text'),
         'spoiler': request.form.get('spoiler')
     })
-    return render_template('my_book_reviews.html')
+    return render_template(
+        'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 
 
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
+    book_reviews = mongo.db.book_reviews.find()
     mongo.db.tasks.remove({'_id': ObjectId(review_id)})
     return redirect(url_for(
-        'my_book_reviews', display_name=d_name))
+        'my_book_reviews', display_name=d_name, book_reviews=book_reviews)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -206,15 +230,17 @@ def register():
         else:
             register = {
                 "email": request.form.get("reg-email").lower(),
-                "password": generate_password_hash(request.form.get(
-                    "create-password")),
-                "display_name": request.form.get("create-display-name").lower()
+                "password": generate_password_hash(
+                    request.form.get("create-password")),
+                "display_name": request.form.get(
+                    "create-display-name").lower()
             }
             mongo.db.users.insert_one(register)
 
             # put the new user into the 'session" cookie
             session["email"] = request.form.get("reg-email")
-            session['display_name'] = request.form.get("display_name")
+            session['display_name'] = request.form.get(
+                "display_name")
             flash("Account Creation Successful")
 
     return render_template("register.html")

@@ -10,12 +10,16 @@
         <div class="col s12">
 			<div class="card horizontal hoverable">
 				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="#">
+                {% if book['volumeInfo']['imageLinks'] %}
+					<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+                {% endif %}
 				</div>
 				<div class="card-stacked">
 					<div class="card-content">
-						<p class="card-title black-text">Book Title</p>
-						<p class="card-subtitle">Book Author</p>
+						<p class="card-title black-text">{{ book['volumeInfo']['title']}}</p>
+                        {% for author in book['volumeInfo']['authors'] %}
+							<p class="card-subtitle">{{ author }}</p>
+                        {% endfor %}
                     </div>
 				</div>
 			</div>
@@ -36,7 +40,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="display-name" name="display-name" type="text" value="DISPLAY NAME VARIABLE">
+                                <input id="display-name" name="display-name" type="text" value="{{ display_name }}">
                                 <label for="display-name"></label>
                             </div>
                         </td>
@@ -49,19 +53,8 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="book-title" name="book-title" type="text" value="BOOK TITLE VARIABLE">
+                                <input id="book-title" name="book-title" type="text" value="{{ book['volumeInfo']['title']}}">
                                 <label for="book-title"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ISBN</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="input-field">
-                                <input id="isbn" name="isbn" type="text" value="ISBN VARIABLE">
-                                <label for="isbn"></label>
                             </div>
                         </td>
                     </tr>
@@ -81,7 +74,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input placeholder="title" id="review-title" name="review-title" type="text" class="validate">
+                                <input placeholder="review-title" id="review-title" name="review-title" type="text" class="validate">
                                 <label for="review-title"></label>
                             </div>
                         </td>

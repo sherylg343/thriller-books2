@@ -23,7 +23,6 @@
                             <p class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
                         </div>
 						<div class="card-action">
-							<a href="{{ url_for('book_profile', volume_id=book['id']) }}">View Book Profile & Reviews</a>
                             <a href="{{ url_for('book_review_form', volume_id=book['id']) }}">Write A Review</a>
 						</div>
 					</div>
@@ -48,8 +47,7 @@
              <h4>Book Reviews</h4>
         </div>
     </div>
-{% for review in reviews %}
-    {% if volume_id == review.volume_id %}
+
     <table id="ratings-summary">
         <tbody>
             <tr>
@@ -61,30 +59,26 @@
     </table>
     <div class="row spacer">
     </div>
+{% for review in reviews %}
     <table id="reader-ratings">
         <tbody>
+        <tr>
+            <td>{{ review.date }}</td>
+        </tr>
             <tr>
                 <td>{{ review.display_name }} rated it:</td>
-                <td>{{ review.rating }}</td>
+                <td>{{ review.rating }}</td>        
             </tr>
             <tr>
-                <td>{{ review.date }}</td>
+                <td>{{ review.review_text }}</td>
+            </tr>
+            <tr>
+                <td>Spoiler?  {{ review.spoiler }}</td>
             </tr>
         </tbody>
     </table>
-    <div class="row">
-        <div class="col s12">
-            <p>{{ review.review_text }}</p>
-        </div>
-    </div>
     <div class="row spacer">
     </div>
-    <div class="row">
-        <div class="col s12">
-            <p>Spoiler?  {{ review.spoiler }}</p>
-        </div>
-    </div>
-    {% endif %}
 {% endfor %}
 
 </section>                   
