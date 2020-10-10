@@ -35,7 +35,7 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down white-text">
                 <li><a href="{{ url_for('get_home') }}" class="yellow-text">Home</a></li>
-                <li><a href="#featured" class="yellow-text">Featured Books</a></li>
+                <li><a href="{{ url_for('get_home', _anchor='featured') }}" class="yellow-text">Featured Books</a></li>
                 <li><a href="{{ url_for('register') }}" class="black-text">Create Account</a></li>
                 <li><a class="dropdown-trigger yellow-text" href="#!" data-target="dropdown1">My Account<i class="material-icons yellow-text right">arrow_drop_down</i></a></li>
                 </ul>
@@ -43,7 +43,7 @@
     </nav>
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('get_home') }}" class="black-text">Home</a></li>
-        <li><a href="#featured" class="black-text">Featured Books</a></li>
+        <li><a href="{{ url_for('get_home', _anchor='featured') }}" class="black-text">Featured Books</a></li>
        {% if session.email %}
             <li><a href="{{ url_for('my_book_reviews') }}" class="black-text">My Book Reviews</a></li>
             <li><a href="{{ url_for('profile') }}" class="black-text">My Profile</a></li>
