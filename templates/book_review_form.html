@@ -38,8 +38,8 @@
                         <th>Display Name:</th>
                         <th>
                             <div class="input-field">
-                                <input id="display-name" name="display-name" type="text" value="{{ display_name }}">
-                                <label for="display-name"></label>
+                                <input id="display_name" name="display_name" type="text" value="{{ display_name }}">
+                                <label for="display_name"></label>
                             </div>
                         </th>
                     </tr>
@@ -49,17 +49,26 @@
                         <td>Book Title</td>
                         <td>
                             <div class="input-field">
-                                <input id="book-title" name="book-title" type="text" value="{{ book['volumeInfo']['title']}}">
-                                <label for="book-title"></label>
+                                <input id="book_title" name="book_title" type="text" value="{{ book['volumeInfo']['title']}}">
+                                <label for="book_title"></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>Volume Id</td>
-                        <td colspan="1">
+                        <td>
                             <div class="input-field">
-                                <input id="volume-id" name="volume-id" type="text" value="{{ book['id'] }}">
-                                <label for="volume-id"></label>
+                                <input id="volume_id" name="volume_id" type="text" value="{{ book['id'] }}">
+                                <label for="volume_id"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date Reviewed</td>
+                        <td>
+                            <div class="input-field">
+                                <input id="date" type="text" name="date" value="{{ today }}" />
+                                <label for="date"></label>
                             </div>
                         </td>
                     </tr>
@@ -71,27 +80,27 @@
                         <td colspan="1">*My Rating(click to rate):</td>
                         <td>
                             <label for="btn1">
-                            <input class="with-gap"  id="btn1" name="review-rating" type="radio" value="1" />
+                            <input class="with-gap"  id="btn1" name="rating" type="radio" value="1" />
                             </label>
                         </td>
                         <td>
                             <label for="btn2">
-                            <input class="with-gap" id="btn2" name="review-rating" type="radio" value="2" />
+                            <input class="with-gap" id="btn2" name="rating" type="radio" value="2" />
                             </label>
                         </td>
                         <td>
                             <label for="btn3">
-                            <input class="with-gap" id="btn3" name="review-rating" value="3" type="radio" />
+                            <input class="with-gap" id="btn3" name="rating" value="3" type="radio" />
                             </label>
                         </td>
                         <td>
                             <label for="btn4">
-                            <input class="with-gap" id="btn4" name="review-rating" value="4" type="radio" />
+                            <input class="with-gap" id="btn4" name="rating" value="4" type="radio" />
                             </label>
                         </td>
                         <td>
                             <label for="btn5">
-                            <input class="with-gap" id="btn5" />
+                            <input class="with-gap" id="btn5" name="rating" value="5" type="radio" />
                             </label>
                         </td>
                     </tr>
@@ -105,8 +114,8 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input placeholder="Review title" id="review-title" name="review-title" type="text" class="validate">
-                                <label for="review-title"></label>
+                                <input placeholder="Review title" id="review_title" name="review_title" type="text" class="validate">
+                                <label for="review_title"></label>
                             </div>
                         </td>
                     </tr>
@@ -116,8 +125,8 @@
                     <tr>
                         <td colspan="1">
                             <div class="input-field">
-                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" placeholder="Enter your review here"></textarea>
-                                <label for="review-textarea"></label>
+                                <textarea id="review_text" name="review_text" class="materialize-textarea" placeholder="Enter your review here"></textarea>
+                                <label for="review_text"></label>
                             </div>
                         </td>
                     </tr>
@@ -142,7 +151,7 @@
             </table>
             <div class="row btn-row">
                 <div class="col s12 btn-col center-align">
-                    <button class="btn-large black-text yellow" type="submit" name="action">Submit Review
+                    <button class="btn-large black-text yellow" type="submit">Submit Review
                         <i class="material-icons right">add_box</i>
                     </button>
                 </div>

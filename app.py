@@ -1,12 +1,12 @@
 import os
 import requests
 import json
-import shutil
 from flask import (
     Flask, flash, render_template, request, redirect, url_for, session)
 from flask_pymongo import PyMongo
 from requests.exceptions import HTTPError
 from bson.objectid import ObjectId
+from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -108,8 +108,8 @@ def book_profile(volume_id):
     reviews = mongo.db.book_reviews.find({'volume_id': volume_id})
     reviews_list = True if len(list(reviews)) else False
     if not reviews_list:
-        print("---------------empty")
-        flash("No reviews have been written yet for this book. Consider writing one if you've read the book.")
+        flash(
+            "No reviews have been written yet for this book. Consider writing one if you've read the book.")
     volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
     volume_full_url = volume_base_url + volume_id
     try:
@@ -117,6 +117,16 @@ def book_profile(volume_id):
         vol_response.raise_for_status()
         # convert json response into Python data
         vol_response = vol_response.json()
+        ratings = mongo.db.book_reviews.find({'volume_id': volume_id})['rating']
+        ratings_list = list(ratings)
+        sum_num = 0
+        for x in ratings_list:
+            sum_num = sum_num + x
+
+        count = len(ratings_list)
+        avg = sum_num / count
+        stars = round(avg, 0)
+        print("-------", count, avg, stars)
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
@@ -132,6 +142,7 @@ def book_profile(volume_id):
 def book_review_form(volume_id):
     if 'email' in session:
         email = session['email']
+        today = date.today()
         d_name = mongo.db.users.find_one(
             {"email": session["email"]})["display_name"]
         volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
@@ -149,7 +160,7 @@ def book_review_form(volume_id):
             print(f'Other error occurred: {err}')
 
         return render_template(
-            "book_review_form.html", book=vol_response, display_name=d_name)
+            "book_review_form.html", book=vol_response, display_name=d_name, today=today)
 
     else:
         flash("Please log in first prior to writing a review.")
@@ -162,16 +173,31 @@ def insert_review():
     book_reviews.insert_one(request.form.to_dict())
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
-    return render_template('my_book_reviews.html', display_name=d_name)
+    book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
+    return render_template(
+        'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
+
+
+@app.route('/avg_ratings/<volume_id>')
+def avg_ratings(volume_id):
+    ratings = mongo.db.book_reviews.find({'volume_id': volume_id})['rating']
+    ratings_list = list(ratings)
+    sum_num = 0
+    for x in ratings_list:
+        sum_num = sum_num + x
+
+    count = len(ratings_list)
+    avg = sum_num / count
+    stars = round(avg, 0)
+
 
 
 @app.route('/my_book_reviews')
 def my_book_reviews():
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
-    book_reviews = mongo.db.book_reviews.find()
     return render_template(
-        'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
+        'my_book_reviews.html', display_name=d_name, book_reviews=mongo.db.book_reviews.find())
 
 
 @app.route('/edit_book_review/<review_id>')
