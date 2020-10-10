@@ -191,6 +191,9 @@ table th {
    text-align: right !important;
 }
 
+#reader-ratings table {
+    border: none;
+}
 /*-------- Star Rating JS Fiddle.net ------*/
 .starRating input { 
     display:none; 

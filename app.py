@@ -117,16 +117,7 @@ def book_profile(volume_id):
         vol_response.raise_for_status()
         # convert json response into Python data
         vol_response = vol_response.json()
-        ratings = mongo.db.book_reviews.find({'volume_id': volume_id})['rating']
-        ratings_list = list(ratings)
-        sum_num = 0
-        for x in ratings_list:
-            sum_num = sum_num + x
-
-        count = len(ratings_list)
-        avg = sum_num / count
-        stars = round(avg, 0)
-        print("-------", count, avg, stars)
+        reviews = mongo.db.book_reviews.find({"volume_id": volume_id})
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
@@ -176,20 +167,6 @@ def insert_review():
     book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
     return render_template(
         'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
-
-
-@app.route('/avg_ratings/<volume_id>')
-def avg_ratings(volume_id):
-    ratings = mongo.db.book_reviews.find({'volume_id': volume_id})['rating']
-    ratings_list = list(ratings)
-    sum_num = 0
-    for x in ratings_list:
-        sum_num = sum_num + x
-
-    count = len(ratings_list)
-    avg = sum_num / count
-    stars = round(avg, 0)
-
 
 
 @app.route('/my_book_reviews')
