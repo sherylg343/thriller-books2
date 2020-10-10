@@ -163,7 +163,7 @@ table th {
 }
 
 .spacer {
-    height: 1.5rem;
+    height: 1rem;
 }
 
 #book-list li {
@@ -193,6 +193,10 @@ table th {
 
 #reader-ratings table {
     border: none;
+}
+
+#reader-ratings tbody tr:nth-child(4) td:nth-child(1) {
+    margin-bottom: 1.5rem;
 }
 /*-------- Star Rating JS Fiddle.net ------*/
 .starRating input { 

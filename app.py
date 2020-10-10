@@ -211,7 +211,8 @@ def delete_review(review_id):
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
     book_reviews = mongo.db.book_reviews.find()
-    mongo.db.tasks.remove({'_id': ObjectId(review_id)})
+    mongo.db.book_reviews.remove({'_id': ObjectId(review_id)})
+    flash("Review successfully deleted")
     return redirect(url_for(
         'my_book_reviews', display_name=d_name, book_reviews=book_reviews))
 

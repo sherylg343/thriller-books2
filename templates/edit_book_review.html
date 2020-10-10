@@ -80,15 +80,13 @@
                         <td>
                             <div class="input-field">
                                 <select id="spoiler" name="spoiler">
-                                    {% for rev in review %}
-                                        {% if rev.spoiler == "" %} 
-                                            <option value="" selected>Choose . . .</option>
-                                        {% elif rev.spoiler == "No" %}
-                                            <option value="no" selected>No</option>
+                                        {% if review.spoiler %}
+                                            <option value="{{ review.spoiler }}" selected>{{ review.spoiler }}</option>
                                         {% else %}
-                                            <option value="yes" selected>Yes</option>
+                                            <option value="" selected>Choose . . .</option>
                                         {% endif %}
-                                    {% endfor %}
+                                        <option value="yes" selected>yes</option>
+                                        <option value="no" selected>no</option>
                                 </select>
                                 <label for="spoiler"></label>
                             </div>           
