@@ -130,27 +130,30 @@ def book_profile(volume_id):
 
 @app.route('/book_review_form/<volume_id>', methods=["GET", "POST"])
 def book_review_form(volume_id):
-    if not session["email"]:
+    if 'email' in session:
+        email = session['email']
+        d_name = mongo.db.users.find_one(
+            {"email": session["email"]})["display_name"]
+        volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
+        volume_full_url = volume_base_url + volume_id
+        try:
+            vol_response = requests.get(volume_full_url)
+            vol_response.raise_for_status()
+            # convert json response into Python data
+            vol_response = vol_response.json()
+        
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+
+        return render_template(
+            "book_review_form.html", book=vol_response, display_name=d_name)
+
+    else:
         flash("Please log in first prior to writing a review.")
         return redirect(url_for("login"))
-    d_name = mongo.db.users.find_one(
-        {"email": session["email"]})["display_name"]
-    volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
-    volume_full_url = volume_base_url + volume_id
-    try:
-        vol_response = requests.get(volume_full_url)
-        vol_response.raise_for_status()
-        # convert json response into Python data
-        vol_response = vol_response.json()
-        
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-
-    except Exception as err:
-        print(f'Other error occurred: {err}')
-
-    return render_template(
-        "book_review_form.html", book=vol_response, display_name=d_name)
 
 
 @app.route('/insert_review', methods=["POST"])

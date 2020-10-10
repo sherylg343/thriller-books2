@@ -171,6 +171,41 @@ table th {
     font-weight: 700;  
 }
 
+#review-table tbody tr:nth-child(4) td:nth-child(1) {
+   text-align: right !important;
+}
+
+#review-table tbody tr:nth-child(4) td:nth-child(2) {
+   text-align: right !important;
+}
+
+#review-table tbody tr:nth-child(4) td:nth-child(3) {
+   text-align: right !important;
+}
+
+#review-table tbody tr:nth-child(4) td:nth-child(4) {
+   text-align: right !important;
+}
+
+#review-table tbody tr:nth-child(4) td:nth-child(5) {
+   text-align: right !important;
+}
+
+/*-------- Star Rating JS Fiddle.net ------*/
+.starRating input { display:none; }
+
+.starRating label { 
+    width: 18px; 
+    height: 16px; 
+    display: inline-block;
+    text-indent: -9999px; /* hide the label text off screen */
+    background: url("http://designmoo.com/wp-content/uploads/2011/01/rating_stars.png") -155px -32px;
+}
+
+.starRating label.on { 
+    background-position: -155px -76px;
+}
+
 /*--------------- Navigation --------------*/
 .brand-logo img {
   display: inline-block;

@@ -25,14 +25,14 @@
 			</div>
         </div>
     </div>
-    <div class="row">
+    <div class="row control-group">
         <form id="review-form" class="col s12 grey lighten-3" action="{{ url_for('insert_review') }}" method="POST">
             <div class="row">
                 <div class="col s12">
                     <p>required fields are marked with *</p> 
                 </div>
             </div>
-            <table>
+            <table id="review-table">
                 <thead>
                     <tr>
                         <th>Display Name:</th>
@@ -59,13 +59,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>*My Rating(click to rate):</td>
+                        <td>*My Rating(click to rate, with 5 being high):</td>
                     </tr>
-                    <tr>
+                    <tr class="controls rating group1">
                         <td>
-                            <div class="container">
-                                <span id="rateMe2"  class="empty-stars"></span>
-                            </div>
+                            <label for="btn1">
+                                <input class="with-gap"  id="btn1" name="review-rating" type="radio" value="1" />
+                            </label>
+                        </td>
+                         <td id="num1">
+                            <label for="btn2">
+                                <input class="with-gap" id="btn2" name="review-rating" type="radio" value="2" />
+                            </label>
+                        </td>
+                         <td>
+                            <label for="btn3">
+                                <input class="with-gap" id="btn3" name="review-rating" value="3" type="radio" />
+                            </label>
+                        </td>
+                         <td>
+                            <label for="btn4">
+                                <input class="with-gap" id="btn4" name="review-rating" value="4" type="radio" />
+                            </label>
+                        </td>
+                         <td>
+                            <label for="btn5">
+                                <input class="with-gap" id="btn5" />
+                            </label>
                         </td>
                     </tr>
                     <tr>
@@ -96,6 +116,8 @@
                 <tbody>
                     <tr>
                         <td>Does your review container spoilers?</td>
+                    </tr>
+                    <tr>
                         <td>
                             <div class="input-field">
                                 <select id="spoiler" name="spoiler">
@@ -121,6 +143,7 @@
 </div>
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 {% endblock %}
 
