@@ -19,11 +19,11 @@
 <!-- Nav Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content black yellow-text">
         {% if session.email %}
-            <li><a href="{{ url_for('my_book_reviews') }}" class="white-text">My Book Reviews</a></li>
-            <li><a href="{{ url_for('profile') }}" class="white-text">My Profile</a></li>
-            <li><a href="{{ url_for('logout') }}" class="white-text">Log Out</a></li>
+            <li><a href="{{ url_for('my_book_reviews') }}">My Book Reviews</a></li>
+            <li><a href="{{ url_for('profile') }}">My Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         {% else %}
-            <li><a href="{{ url_for('login') }}" class="white-text">Log In</a></li>
+            <li><a href="{{ url_for('login') }}">Log In</a></li>
         {% endif %}
     </ul>
 <!-- Navigation -->

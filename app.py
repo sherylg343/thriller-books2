@@ -231,10 +231,10 @@ def register():
 
         if existing_email:
             flash("Email already exists")
-            return redirect({{url_for("register")}})
+            return render_template("login.html")
 
         elif existing_display_name:
-            flash("Display Name already exists")
+            flash("Display Name already exists, please choose another one.")
             return redirect({{url_for("register")}})
 
         else:
@@ -251,7 +251,8 @@ def register():
             session["email"] = request.form.get("reg-email")
             session['display_name'] = request.form.get(
                 "display_name")
-            flash("Account Creation Successful")
+            flash("Account Creation Successful - You are Logged In")
+            return render_template("get_home.html")
 
     return render_template("register.html")
 
@@ -275,13 +276,13 @@ def login():
                 session["display_name"] = d_name
                 flash("Welcome, {}".format(mongo.db.users.find_one(
                     {"email": session["email"]})["display_name"]))
-                return redirect(url_for(
-                    "profile"))
+                return render_template(
+                    "profile.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
 
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
-                return redirect(url_for("login"))
+                return render_template("login.html")
 
         else:
             # username doesn't exist
@@ -290,10 +291,11 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/")
+@app.route("/profile")
 def profile():
-    if session["display_name"]:
-        d_name = session["display_name"]
+    if session["email"]:
+        d_name = mongo.db.users.find_one(
+            {"email": session["email"]})["display_name"] 
         return render_template(
             "profile.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
     else:
