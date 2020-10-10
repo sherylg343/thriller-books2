@@ -171,28 +171,30 @@ table th {
     font-weight: 700;  
 }
 
-#review-table tbody tr:nth-child(4) td:nth-child(1) {
+#review-table2 tbody tr:nth-child(6) td:nth-child(1) {
    text-align: right !important;
 }
 
-#review-table tbody tr:nth-child(4) td:nth-child(2) {
+#review-table2 tbody tr:nth-child(6) td:nth-child(2) {
    text-align: right !important;
 }
 
-#review-table tbody tr:nth-child(4) td:nth-child(3) {
+#review-table2 tbody tr:nth-child(6) td:nth-child(3) {
    text-align: right !important;
 }
 
-#review-table tbody tr:nth-child(4) td:nth-child(4) {
+#review-table2 tbody tr:nth-child(6) td:nth-child(4) {
    text-align: right !important;
 }
 
-#review-table tbody tr:nth-child(4) td:nth-child(5) {
+#review-table2 tbody tr:nth-child(6) td:nth-child(5) {
    text-align: right !important;
 }
 
 /*-------- Star Rating JS Fiddle.net ------*/
-.starRating input { display:none; }
+.starRating input { 
+    display:none; 
+}
 
 .starRating label { 
     width: 18px; 
