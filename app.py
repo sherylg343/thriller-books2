@@ -302,6 +302,11 @@ def profile():
         return render_template("login.html")
 
 
+@app.route("/guidelines")
+def guidelines():
+    return render_template("guidelines.html")
+
+
 @app.route("/logout")
 def logout():
     # remove user from session cookies

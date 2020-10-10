@@ -99,6 +99,15 @@ h3.section-subheading {
     text-align: center;
 }
 
+#sm-icons {
+    margin-left: 40%;
+}
+
+footer i {
+    font-size: 1.7rem;
+    padding: 1rem;
+}
+
 /*--------------- Inputs --------------*/
 .input-field input[type=search] {
     height: 2.6rem;
