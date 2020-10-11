@@ -252,7 +252,7 @@ def register():
             session['display_name'] = request.form.get(
                 "display_name")
             flash("Account Creation Successful - You are Logged In")
-            return render_template("get_home.html")
+            return render_template("index.html")
 
     return render_template("register.html")
 
