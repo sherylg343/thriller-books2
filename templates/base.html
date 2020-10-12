@@ -53,7 +53,6 @@
             <li><a href="{{ url_for('login') }}" class="black-text">Log In</a></li>
         {% endif %}
     </ul>
-    <section>
 	<!-- flash messages -->
 	{% with messages = get_flashed_messages() %}
 	    {% if messages %}
@@ -64,9 +63,7 @@
 	        {% endfor %}
 	    {% endif %}
 	{% endwith %}
-    </section>
     <!-- Search Bar -->
-    <section>
     <div class="row" id="search-row">
         <form id="search-form" class="col s12" action="{{ url_for('book_search_results') }}" method="POST">
             <div class="row">
@@ -88,7 +85,6 @@
             </div> 
         </form>
     </div>
-   </section>
     {% block content %}
     {% endblock %}
 

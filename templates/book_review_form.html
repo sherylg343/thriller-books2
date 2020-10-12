@@ -11,7 +11,7 @@
 			<div class="card horizontal hoverable">
 				<div class="card-image waves-effect waves-block waves-light">
                 {% if book['volumeInfo']['imageLinks'] %}
-					<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+					<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" alt="Book cover image unavailable">
                 {% endif %}
 				</div>
 				<div class="card-stacked">
@@ -160,7 +160,7 @@
     </div>
 </div>
 <!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 {% endblock %}

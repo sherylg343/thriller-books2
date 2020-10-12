@@ -85,8 +85,8 @@
                                         {% else %}
                                             <option value="" selected>Choose . . .</option>
                                         {% endif %}
-                                        <option value="yes" selected>yes</option>
-                                        <option value="no" selected>no</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
                                 </select>
                                 <label for="spoiler"></label>
                             </div>           
@@ -105,7 +105,7 @@
     </div>
 </div>
 <!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 
 {% endblock %}

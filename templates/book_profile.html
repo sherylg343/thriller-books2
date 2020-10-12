@@ -14,7 +14,7 @@
           <img
             class="activator"
             src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}"
-            alt="no image available"
+            alt="Book cover image unavailable"
           />
           {% endif %}
         </div>
@@ -60,7 +60,7 @@
     <div class="row center-align">
         <div class="col s12">
         {% for review in reviews %}
-            <table id="reader-ratings">
+            <table class="reader-ratings">
                 <tbody>
                     <tr>
                         <td>{{ review.date }}</td>

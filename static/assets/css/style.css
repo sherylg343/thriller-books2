@@ -202,11 +202,11 @@ table th {
    text-align: right !important;
 }
 
-#reader-ratings table {
+.reader-ratings table {
     border: none;
 }
 
-#reader-ratings tbody tr:nth-child(4) td:nth-child(1) {
+.reader-ratings tbody tr:nth-child(4) td:nth-child(1) {
     margin-bottom: 1.5rem;
 }
 /*-------- Star Rating JS Fiddle.net ------*/

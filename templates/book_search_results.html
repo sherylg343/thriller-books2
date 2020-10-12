@@ -12,7 +12,7 @@
 				<div class="card horizontal hoverable">
 					<div class="card-image waves-effect waves-block waves-light">
                     {% if book['volumeInfo']['imageLinks'] %}
-						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+						<img class="activator" src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" alt="Book cover image unavailable">
                     {% endif %}
 					</div>
 				    <div class="card-stacked">

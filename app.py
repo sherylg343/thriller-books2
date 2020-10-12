@@ -74,9 +74,13 @@ def get_feature_image():
 
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')
+                flash("An error occurred in processing your search. Please try again or try at a later time.")
+                return render_template('index.html')
 
             except Exception as err:
                 print(f'Other error occurred: {err}')
+                flash("An error occurred in processing your search. Please try again or try at a later time.")
+                return render_template('index.html')
 
 
 @app.route('/book_search_results', methods=["GET", "POST"])
