@@ -65,13 +65,14 @@
 	    {% endif %}
 	{% endwith %}
     </section>
+    <!-- Search Bar -->
     <section>
     <div class="row" id="search-row">
         <form id="search-form" class="col s12" action="{{ url_for('book_search_results') }}" method="POST">
             <div class="row">
 			    <div class="input-field white black-text col s4">  
                     <select id="search-type" class="black-text" name="search-type"  required>
-                        <option value="" class="black-text" disabled selected>Search criteria</option>
+                        <option value="" class="black-text" disabled selected>Choose search type first</option>
                         <option value="author" class="black-text">Author</option>
                         <option class="black-text" value="title">Title</option>
                     </select>
@@ -94,13 +95,11 @@
 <!-- Footer-->
     <footer class="page-footer yellow">
         <div class="container">
-            <div class="row">
                 <div id="sm-icons" class="col s12">
                     <a href="https://mtouch.facebook.com/login/"><i class="fab fa-facebook-square"></i></a>
                     <a href="https://www.instagram.com/accounts/login/?hl=en"><i class= "fab fa-instagram"></i></a>
                 </div>
             </div>
-        </div>
         <div class="footer-copyright">
             <div class="container grey-text darken-3">
             Copyright © Find Thrillers 2020

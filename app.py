@@ -95,9 +95,13 @@ def book_search_results():
 
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
+            flash("An error occurred in processing your search. Please try again or try at a later time.")
+            return render_template('index.html')
 
         except Exception as err:
             print(f'Other error occurred: {err}')
+            flash("An error occurred in processing your search. Please try again or try at a later time.")
+            return render_template('index.html')
 
     return render_template(
         'book_search_results.html', books=j2_response)
@@ -121,9 +125,13 @@ def book_profile(volume_id):
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
+        flash("An error occurred in processing your search. Please try again or try at a later time.")
+        return render_template('index.html')
 
     except Exception as err:
         print(f'Other error occurred: {err}')
+        flash("An error occurred in processing your search. Please try again or try at a later time.")
+        return render_template('index.html')
 
     return render_template(
         'book_profile.html', book=vol_response, reviews=reviews)
@@ -132,10 +140,16 @@ def book_profile(volume_id):
 @app.route('/book_review_form/<volume_id>', methods=["GET", "POST"])
 def book_review_form(volume_id):
     if 'email' in session:
-        email = session['email']
-        today = date.today()
+        reviews = mongo.db.book_reviews.find(
+            {'volume_id': volume_id})
         d_name = mongo.db.users.find_one(
             {"email": session["email"]})["display_name"]
+        for review in reviews:
+            if review['display_name'] == d_name:
+                flash("You have already submitted a review for this book. You may edit or delete it below.")
+                return render_template(
+                    "my_book_reviews.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
+        today = date.today()
         volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
         volume_full_url = volume_base_url + volume_id
         try:
@@ -143,19 +157,23 @@ def book_review_form(volume_id):
             vol_response.raise_for_status()
             # convert json response into Python data
             vol_response = vol_response.json()
-        
+
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
+            flash("An error occurred in processing your search. Please try again or try at a later time.")
+            return render_template('index.html')
 
         except Exception as err:
             print(f'Other error occurred: {err}')
+            flash("An error occurred in processing your search. Please try again or try at a later time.")
+            return render_template('index.html')
 
         return render_template(
-            "book_review_form.html", book=vol_response, display_name=d_name, today=today)
+            'book_review_form.html', book=vol_response, display_name=d_name, today=today)
 
     else:
         flash("Please log in first prior to writing a review.")
-        return redirect(url_for("login"))
+        return render_template("login.html")
 
 
 @app.route('/insert_review', methods=["POST"])
@@ -165,6 +183,7 @@ def insert_review():
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
     book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
+    flash("Thank you for submitting your review. You may view it by scrolling down this page.")
     return render_template(
         'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 

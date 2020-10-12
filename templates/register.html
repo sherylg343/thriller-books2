@@ -2,71 +2,96 @@
 
 <!-- Create User Profile -->
 <div class="row">
-	<h3 class="center-align">Create Account</h3>
+  <h3 class="center-align">Create Account</h3>
 </div>
 
 <div class="row">
-	<form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
-		<div class="card-panel">
-			<!-- Email -->
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="fas fa-user-cog prefix grey-text"></i>
-					<input id="reg-email" name="reg-email" type="email" class="validate" required>
-					<label for="reg-email">Email</label>
-				</div>
-			</div>
+  <form
+    class="col s12 m8 offset-m2"
+    method="POST"
+    action="{{ url_for('register') }}"
+  >
+    <div class="card-panel">
+      <!-- Email -->
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="fas fa-user-cog prefix grey-text"></i>
+          <input
+            id="reg-email"
+            name="reg-email"
+            type="email"
+            class="validate"
+            required
+          />
+          <label for="reg-email">Email</label>
+          <span
+            class="helper-text"
+            data-error="please input a valid email address"
+            data-success="Email is formatted correctly!"
+            ></span
+          >
+        </div>
+      </div>
 
-			<!-- Password -->
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="fas fa-user-lock prefix grey-text"></i>
-					<input
-              id="create-password"
-              name="create-password"
-              type="password"
-              minlength="6"
-              maxlength="15"
-              pattern="^[a-zA-Z0-9]{5,15}$"
-              class="validate form-control"
-              required
-            />
-					<label for="create-password">Password</label>
-				</div>
-			</div>
-			<!-- Display Name -->
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="fas fa-user-circle prefix grey-text"></i>
-					<input
-              id="create-display-name"
-              name="create-display-name"
-              minlength="6"
-              maxlength="15"
-              pattern="^[a-zA-Z0-9]{5,15}$"
-              class="form-control"
-              required
-            />
-					<label for="create-display-name">Display Name</label>
-				</div>
-			</div>
-			<!-- Create Account -->
-			<div class="row">
-				<button type="submit" class="col s12 btn-large yellow text-shadow">
-                Create Account
-                <i class="fas fa-sign-in-alt"></i>
-                </button>
-			</div>
-		</div>
-	</form>
+      <!-- Password -->
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="fas fa-user-lock prefix grey-text"></i>
+          <input
+            id="create-password"
+            name="create-password"
+            type="password"
+            minlength="6"
+            maxlength="15"
+            pattern="^[a-zA-Z0-9]{5,15}$"
+            class="validate form-control"
+            required
+          />
+          <label for="create-password">Password</label>
+          <span
+            class="helper-text"
+            data-error="password is not formatted correctly"
+            data-success="Password is formatted correctly!"
+            >Password must consist of 6 to 15 numbers or upper/lower case letters - no spaces or special characters</span
+          >
+        </div>
+      </div>
+      <!-- Display Name -->
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="fas fa-user-circle prefix grey-text"></i>
+          <input
+            id="create-display-name"
+            name="create-display-name"
+            minlength="6"
+            maxlength="15"
+            pattern="^[a-zA-Z0-9]{5,15}$"
+            class="validate form-control"
+            required
+          />
+          <label class="active" for="create-display-name">Display Name</label>
+          <span class="helper-text"
+            data-error="Display name is not formatted correctly"
+            data-success="Display Name is formatted correctly!"
+            >Display Name must consist of 6 to 15 numbers or upper/lower case letters - no spaces or special characters></span
+          >
+        </div>
+      </div>
+      <!-- Create Account -->
+      <div class="row">
+        <button type="submit" class="col s12 btn-large yellow text-shadow">
+          Create Account
+          <i class="fas fa-sign-in-alt"></i>
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
 
 <div class="row">
-	<div class="col s12 center-align">
-		<p>
-			Already Have An Account? <a href="{{ url_for('login') }}"> Log In</a>
-		</p>
-	</div>
+  <div class="col s12 center-align">
+    <p>Already Have An Account? <a href="{{ url_for('login') }}"> Log In</a></p>
+  </div>
 </div>
 
 {% endblock %}
