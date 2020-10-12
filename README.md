@@ -5,7 +5,7 @@
 </h3>
 
 <h1 style="text-align: center">
-Find Thriller Book Community Website
+Find Thrillers Book Community Website
 </h1>
 
 <div style="text-align: center">
