@@ -1,68 +1,86 @@
 {% extends 'base.html' %} {% block content %}
-
+<!--Jumbotron-->
 <header class="center-align" id="masthead">
-    <img class="responsive-img" src="{{ url_for('static', filename='assets/images/bg-header.jpg') }}">
-   <div class="container center-align masthead-container">
-        <div class="row">
-            <div class="col s12 center-align white-text">
-		        <div class="masthead-subheading">Welcome To Our Reader Community . . .
-                </div>
-            </div>
+  <img
+    class="responsive-img"
+    src="{{ url_for('static', filename='assets/images/bg-header.jpg') }}"
+  />
+  <div class="container center-align masthead-container">
+    <div class="row">
+      <div class="col s12 center-align white-text">
+        <div class="masthead-subheading">
+          Welcome To Our Reader Community . . .
         </div>
-        <div class="row">
-            <div class="col s12 center-align white-text">
-		        <div class="masthead-heading">for Thriller & Suspense Novels!</div>
-            </div>
-        </div>
-        <div class="row" id="mast-row">
-            <div class="col s12 center-align" id="mast-link">
-		        <a class="waves-effect yellow black-text btn-small text-uppercase js-scroll-trigger" href="#featured">Featured Books</a> 
-            </div>
-        </div>
-     </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 center-align white-text">
+        <div class="masthead-heading">for Thriller & Suspense Novels!</div>
+      </div>
+    </div>
+    <div class="row" id="mast-row">
+      <div class="col s12 center-align" id="mast-link">
+        <a
+          class="waves-effect yellow black-text btn-small text-uppercase js-scroll-trigger"
+          href="#featured"
+          >Featured Books</a
+        >
+      </div>
+    </div>
+  </div>
 </header>
 
 <!-- Featured Books -->
 <section id="featured">
-	<div class="container">
-		<div class="center-align">
-			<h2 class="text-uppercase section-heading">Featured Books</h2>
-			<h3 class="section-subheading">
-				Newly released books for you to check out.
-			</h3>
-		</div>
-		<div class="card-container">
-
-		{% for book in featured %}
-			{% if book.featured %}
-            <div class="col s12">
-				<div class="card horizontal hoverable">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ book.image }}">
-					</div>
-					<div class="card-stacked">
-						<div class="card-content">
-							<span class="card-title activator black-text">
-							    {{ book.title }}<i class="material-icons right">more_vert</i></span>
-							<p class="card-subtitle">{{ book.author}}</p>
-                            <p>    </p>
-                            <p><a href="{{ url_for('book_profile', volume_id=book.volume_id) }}">Book Profile & Reviews</a></p>
-                        </div>
-						<div class="card-action">
-                            <a href="{{ url_for('book_review_form', volume_id=book.volume_id) }}">Write A Review</a>
-                        </div>
-					</div>
-                    <div class="card-reveal">
-                        <span class="card-title black-text">{{ book.title }}<i class="material-icons right">close</i></span>
-						<p>{{ book.description }}</p>
-                        <p>{{ book.volume_id }}</p>
-					</div>
-				</div>
-			</div>
-			{% endif %}
-		{% endfor %} 
-		</div>
-	</div>
+  <div class="container">
+    <div class="center-align">
+      <h2 class="text-uppercase section-heading">Featured Books</h2>
+      <h3 class="section-subheading">
+        Newly released books for you to check out.
+      </h3>
+    </div>
+    <div class="card-container">
+      {% for book in featured %} {% if book.featured %}
+      <div class="col s12">
+        <div class="card horizontal hoverable">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ book.image }}" />
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <span class="card-title activator black-text">
+                {{ book.title }}<i class="material-icons right"
+                  >more_vert</i
+                ></span
+              >
+              <p class="card-subtitle">{{ book.author}}</p>
+              <p></p>
+              <p>
+                <a
+                  href="{{ url_for('book_profile', volume_id=book.volume_id) }}"
+                  >Book Profile & Reviews</a
+                >
+              </p>
+            </div>
+            <div class="card-action">
+              <a
+                href="{{ url_for('book_review_form', volume_id=book.volume_id) }}"
+                >Write A Review</a
+              >
+            </div>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title black-text"
+              >{{ book.title }}<i class="material-icons right">close</i></span
+            >
+            <p>{{ book.description }}</p>
+            <p>{{ book.volume_id }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
 </section>
 
 {% endblock %}
