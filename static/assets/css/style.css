@@ -242,8 +242,8 @@ table th {
 }
 
 .flashes h4 {
-    line-height: 2.5rem;
-    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
     background-color: var(--clr-darkteal);
     color: white;
 }
@@ -351,6 +351,10 @@ table th {
     }
     table {
         font-size: 14px;
+    }
+    .flashes h4 {
+    line-height: 2.5rem;
+    font-size: 1.5rem;
     }
 }
 
