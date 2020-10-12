@@ -19,7 +19,6 @@ body {
   font-weight: 700;
 }
 
-
 /*------- Text and Headers -----------*/
 #masthead img {
     width: 100%;
@@ -80,7 +79,7 @@ h3.section-subheading {
   margin-left: 8%;
 }
 
-/*------------- Buttons, Icons ----------*/
+/*------------- Buttons, Icons, Links ----------*/
 #search-btn {
     position: relative;
     margin-left: 0;

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
 	<link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" />
 	<title>Find Thrillers</title>
 </head>
-
 <body data-spy="scroll" data-target="nav-parent">
 <!-- Nav Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content black yellow-text">
@@ -87,9 +85,8 @@
     </div>
     {% block content %}
     {% endblock %}
-
-<!-- Footer-->
-    <footer class="page-footer yellow">
+<!-- Footer
+    <footer class="page-footer footer yellow">
         <div id="sm-icons" class="col s12">
             <a href="https://mtouch.facebook.com/login/"><i class="fab fa-facebook-square"></i></a>
             <a href="https://www.instagram.com/accounts/login/?hl=en"><i class= "fab fa-instagram"></i></a>
@@ -98,7 +95,7 @@
             Copyright © Find Thrillers 2020
             <a href="{{ url_for('guidelines') }}" class="grey-text darken-3 right">Terms of Use</a>
         </div>
-    </footer>
+    </footer>-->
      <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
