@@ -28,6 +28,10 @@ MONGO_URI = os.environ.get('MONGO_URI_BOOKS')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
 
 
+SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
+VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
+
+
 @app.route('/')
 @app.route('/get_home', methods=["GET", "POST"])
 def get_home():
@@ -47,11 +51,11 @@ def get_feature_image():
             title_formatted = title.replace(" ", "+")
             author = book['author']
             author_formatted = author.replace(" ", "+")
-            url = 'https://www.googleapis.com/books/v1/volumes?q=' + "intitle:" + title_formatted + "+" + "inauthor:" + author_formatted + '&key=' + API_KEY
+            img_url = SEARCH_BASE_URL + "intitle:" + title_formatted + "+" + "inauthor:" + author_formatted + '&key=' + API_KEY
         # from pynative.com/parse-json-response-
         # using-python-requests-library/
             try:
-                response = requests.get(url)
+                response = requests.get(img_url)
                 response.raise_for_status()
                 j_response = response.json()
                 for x in range(1):
@@ -87,9 +91,9 @@ def book_search_results():
     search_text_formatted = search_text.replace(" ", "+")
     search_type = request.form.get('search-type')
     search_type_formatted = "in" + search_type + ":"
-    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
+    search_url = SEARCH_BASE_URL + search_type_formatted + search_text_formatted + '&key=' + API_KEY
     try:
-        response = requests.get(url)
+        response = requests.get(search_url)
         response.raise_for_status()
         # convert json response into Python data
         j2_response = response.json()
@@ -110,13 +114,13 @@ def book_search_results():
 
 @app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
 def book_profile(volume_id):
+    reviews_list = []
     reviews = mongo.db.book_reviews.find({'volume_id': volume_id})
     reviews_list = True if len(list(reviews)) else False
     if not reviews_list:
         flash(
             "No reviews have been written yet for this book. Consider writing one if you've read the book.")
-    volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
-    volume_full_url = volume_base_url + volume_id
+    volume_full_url = VOLUME_BASE_URL + volume_id
     try:
         vol_response = requests.get(volume_full_url)
         vol_response.raise_for_status()
@@ -150,8 +154,7 @@ def book_review_form(volume_id):
                 flash("You have already submitted a review for this book. You may edit or delete it below.")
                 return render_template(
                     "my_book_reviews.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
-        volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
-        volume_full_url = volume_base_url + volume_id
+        volume_full_url = VOLUME_BASE_URL + volume_id
         try:
             vol_response = requests.get(volume_full_url)
             vol_response.raise_for_status()
@@ -169,8 +172,7 @@ def book_review_form(volume_id):
             return render_template('index.html')
 
         return render_template(
-            'book_review_form.html', book=vol_response, display_name=d_name, today=today)
-
+            'book_review_form.html', book=vol_response)
     else:
         flash("Please log in first prior to writing a review.")
         return render_template("login.html")
@@ -184,7 +186,7 @@ def insert_review():
     review_data = request.form.to_dict()
     review_data["display_name"] = d_name
     review_data["date"] = date.today()
-    review.insert_one(review_data)
+    book_reviews.insert_one(review_data)
     book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
     flash("Thank you for submitting your review. You may view it by scrolling down this page.")
     return render_template(

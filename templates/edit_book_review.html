@@ -14,19 +14,6 @@
                 </div>
             </div>
             <table>
-                <thead>
-                      <tr>
-                        <th>Display Name:</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div class="input-field">
-                                <input id="display-name" name="display-name" type="text" value="{{ review.display_name }}">
-                                <label for="display-name"></label>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr>
                         <td>Book Title</td>
@@ -35,7 +22,7 @@
                         <td>
                             <div class="input-field">
                                 <input id="book-title" name="book-title" type="text" value="{{ review.book_title }}">
-                                <label for="book-title"></label>
+                                <label for="book-title" disabled></label>
                             </div>
                         </td>
                     </tr>
@@ -55,7 +42,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="review-title" name="review-title" type="text" value="{{ review.review_title }}">
+                                <input id="review-title" name="review-title" type="text" value="{{ review.review_title }}" minlength="4" maxlength="100">
                                 <label for="review-title"></label>
                             </div>
                         </td>
@@ -66,7 +53,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <textarea id="review-textarea" name="review-text" class="materialize-textarea">{{ review.review_text }}</textarea>
+                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" minlength="40" maxlength="5000">{{ review.review_text }}</textarea>
                                 <label for="review-textarea"></label>
                             </div>
                         </td>

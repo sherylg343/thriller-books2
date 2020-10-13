@@ -33,24 +33,13 @@
                 </div>
             </div>
             <table id="review-table1">
-                <thead>
-                    <tr>
-                        <th>Display Name:</th>
-                        <th>
-                            <div class="input-field">
-                                <input id="display_name" name="display_name" type="text" value="{{ display_name }}">
-                                <label for="display_name"></label>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
                 <tbody class="control-group">
                     <tr>
                         <td>Book Title</td>
                         <td>
                             <div class="input-field">
                                 <input id="book_title" name="book_title" type="text" value="{{ book['volumeInfo']['title']}}">
-                                <label for="book_title"></label>
+                                <label for="book_title" disabled></label>
                             </div>
                         </td>
                     </tr>
@@ -59,16 +48,7 @@
                         <td>
                             <div class="input-field">
                                 <input id="volume_id" name="volume_id" type="text" value="{{ book['id'] }}">
-                                <label for="volume_id"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Date Reviewed</td>
-                        <td>
-                            <div class="input-field">
-                                <input id="date" type="text" name="date" value="{{ today }}" />
-                                <label for="date"></label>
+                                <label for="volume_id" disabled></label>
                             </div>
                         </td>
                     </tr>
@@ -114,7 +94,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input placeholder="Review title" id="review_title" name="review_title" type="text" class="validate" required>
+                                <input placeholder="Review title" id="review_title" name="review_title" type="text" minlength="4" maxlength="100" class="validate" required>
                                 <label for="review_title"></label>
                             </div>
                         </td>
@@ -125,7 +105,7 @@
                     <tr>
                         <td colspan="1">
                             <div class="input-field">
-                                <textarea id="review_text" name="review_text" class="materialize-textarea" placeholder="Enter your review here" required></textarea>
+                                <textarea id="review_text" name="review_text" class="materialize-textarea" minlength="40" maxlength="5000" placeholder="Enter your review here" required></textarea>
                                 <label for="review_text"></label>
                             </div>
                         </td>
