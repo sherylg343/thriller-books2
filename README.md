@@ -257,6 +257,11 @@ them in a user database.
 * Book review forms are required to ensure basic information is collected
 so that the reviews provide value to readers. These required fields are
 marked so user realizes they are required.
+* Review form does include volume id and book title so they are captured
+for database, however, both input fields are disabled, so they cannot
+be altered by the user.
+* The Review Title and Review Text have minimum and maximum lengths 
+included in html tags to provide front-end validation.
 * A search criterion is required when searching for a book to provide
 a more accurate book search for the user.
 
@@ -296,6 +301,10 @@ without having to scroll down. This feature would improve usability.
 ### Include a Password Reset on User Profile page
 This is a basic feature necessary for users to reset password if they
 lose it.
+
+### Add Back-end Validation of input fields
+This would help guard the site against malicious hacking and inserting
+of inappropriate data.
 
 <p>
 
@@ -450,13 +459,14 @@ All copy was written by developer.
 * The star rating was taken from [jsfiddle]( https://jsfiddle.net/8cn2mekf/8/)
 * Additional resources used for snippets of code are marked above the corresponding 
 code in the CSS and JavaScript files.
+* Using requests module for API: from [PYnative](https://pynative.com/parse-json-response-using-python-requests-library/)
 
 
 ### Acknowledgements
 Many thanks to Code Institute tutors and alumni who provided assistance
 throughout the development phase, with special appreciation extended towards:
 
-* Brian Mancharia - mentor; Brian provided extraordinary guidance and 
+* Brian Macharia - mentor; Brian provided extraordinary guidance and 
 insight that enabled me to tackle this project.
 * Code Institute Tutors: Michael, Samantha, Scott, Anna, Roman, Michael and Igor
 with special thanks to Tim for not only his assistance but also sharing the 

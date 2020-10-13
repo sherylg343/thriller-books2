@@ -507,3 +507,20 @@ was "5"
 <br>
 Test Result: Successful
 </p>
+
+#### Part Nine: Delete Book Review
+**Test #: 23**
+<p>
+Action Taken: On Profile Page, scroll down to view book review
+just entered for "The Heist" and click on red "Delete" button
+<br>
+"Before" State: teal "Edit" button next to red "Delete" button
+<br>
+"After" State: A pop-up box appears with the website address on 
+it and the following question, "Are you certain you want to delete
+this review?" "Cancel" and "OK" are the two options offerred. Click
+on "OK" and I'm redirected to "ssg888's Book Reviews" page where a
+message flashes across the top: ""Review successfully deleted"
+<br>
+Test Result: Successful
+</p>

@@ -43,6 +43,10 @@ def get_home():
 
 @app.route('/get_feature_image')
 def get_feature_image():
+    """ if needed, obtains the url address for
+    book cover images as well as the volume ids to facilitate
+    adding and editing book reviews for these select books 
+    """
     check_books = mongo.db.feature_books.find()
     for book in check_books:
         if (book["image"] == "") or (book["volume_id"] == ""):
@@ -52,8 +56,9 @@ def get_feature_image():
             author = book['author']
             author_formatted = author.replace(" ", "+")
             img_url = SEARCH_BASE_URL + "intitle:" + title_formatted + "+" + "inauthor:" + author_formatted + '&key=' + API_KEY
-        # from pynative.com/parse-json-response-
-        # using-python-requests-library/
+            """ Calling Google Books API and putting in json format
+            while accommodating any errors that occur with HTTPError module
+            """
             try:
                 response = requests.get(img_url)
                 response.raise_for_status()
@@ -86,6 +91,10 @@ def get_feature_image():
 
 @app.route('/book_search_results', methods=["GET", "POST"])
 def book_search_results():
+    """ using search criteria and keywords to call 
+    Google Books API, putting response in json format
+    and displaying search results in template
+    """
     search_text = request.form.get('search')
     search_text_formatted = search_text.replace(" ", "+")
     search_type = request.form.get('search-type')
@@ -113,6 +122,9 @@ def book_search_results():
 
 @app.route('/book_profile/<volume_id>', methods=["GET", "POST"])
 def book_profile(volume_id):
+    """ calling Google Books API by volume id to display single
+    Book Profile
+    """
     reviews_list = []
     reviews = mongo.db.book_reviews.find({'volume_id': volume_id})
     reviews_list = True if len(list(reviews)) else False
@@ -143,6 +155,10 @@ def book_profile(volume_id):
 
 @app.route('/book_review_form/<volume_id>', methods=["GET", "POST"])
 def book_review_form(volume_id):
+    """checking if user is logged in and if user already wrote
+    a book review before calling Google Books API
+    and presenting review form
+    """
     if 'email' in session:
         reviews = mongo.db.book_reviews.find(
             {'volume_id': volume_id})
@@ -179,6 +195,8 @@ def book_review_form(volume_id):
 
 @app.route('/insert_review', methods=["POST"])
 def insert_review():
+    """ inserting new book review in Mongo DB
+    """
     book_reviews = mongo.db.book_reviews
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
@@ -194,6 +212,8 @@ def insert_review():
 
 @app.route('/my_book_reviews')
 def my_book_reviews():
+    """ displaying user's book reviews
+    """
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
     return render_template(
@@ -202,6 +222,8 @@ def my_book_reviews():
 
 @app.route('/edit_book_review/<review_id>')
 def edit_book_review(review_id):
+    """ displays form to edit a book review
+    """
     the_review = mongo.db.book_reviews.find_one({"_id": ObjectId(review_id)})
     return render_template(
         'edit_book_review.html', review=the_review)
@@ -209,6 +231,9 @@ def edit_book_review(review_id):
 
 @app.route('/update_review/<review_id>', methods=["GET", "POST"])
 def update_review(review_id):
+    """ update a book review based on edit review form
+    and confirm update to user
+    """
     book_reviews = mongo.db.book_reviews.find()
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
@@ -231,6 +256,9 @@ def update_review(review_id):
 
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
+    """ delete review per user reequest
+    and confirm deletion
+    """
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
     book_reviews = mongo.db.book_reviews.find()
@@ -242,10 +270,11 @@ def delete_review(review_id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """ create a user account
+    """
     if request.method == "POST":
-        #
-        # print(mongo.db.users.find())
-        # check if username already exists in db
+        """ check if username already exists in db
+        """
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("reg-email")})
         existing_display_name = mongo.db.users.find_one(
@@ -270,7 +299,8 @@ def register():
             }
             mongo.db.users.insert_one(register)
 
-            # put the new user into the 'session" cookie
+            """ put the new user into the 'session" cookie
+            """
             session["email"] = request.form.get("reg-email")
             session['display_name'] = request.form.get(
                 "display_name")
@@ -282,17 +312,20 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """ login proces with validation and security
+    hashed password
+    """
     if request.method == "POST":
-        # check if username already exists in db
+        """ check if username already exists in db
+        """
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
         if existing_email:
-            # ensure hashed password matches user input
-            print(existing_email["password"])
-            print(request.form.get("password"))
+            """ ensure hashed password matches user input
+            """
             if check_password_hash(
-                    existing_email["password"], request.form.get("password")):
+                existing_email["password"], request.form.get("password")):
                 session["email"] = request.form.get("email").lower()
                 d_name = mongo.db.users.find_one(
                     {"email": session["email"]})["display_name"]
@@ -303,12 +336,14 @@ def login():
                     "profile.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
 
             else:
-                # invalid password match
+                """ if invalid password match
+                """
                 flash("Incorrect Username and/or Password")
                 return render_template("login.html")
 
         else:
-            # username doesn't exist
+            """ if username doesn't exist
+            """
             flash("Account does not exist, please create one")
             return redirect(url_for("register"))
     return render_template("login.html")
@@ -316,6 +351,9 @@ def login():
 
 @app.route("/profile")
 def profile():
+    """ Display user profile with list of 
+    reviewed books based on display_name
+    """
     if session["email"]:
         d_name = mongo.db.users.find_one(
             {"email": session["email"]})["display_name"] 
@@ -325,14 +363,10 @@ def profile():
         return render_template("login.html")
 
 
-@app.route("/guidelines")
-def guidelines():
-    return render_template("guidelines.html")
-
-
 @app.route("/logout")
 def logout():
-    # remove user from session cookies
+    """remove user from session cookies
+    """
     flash("You have been logged out")
     session.pop("email")
     return redirect(url_for("login"))
