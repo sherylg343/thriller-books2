@@ -262,6 +262,13 @@ table th {
     margin-bottom: 15%;
 }
 
+.card .card-content .card-title {
+    line-height: 24px;
+}
+.card .card-title.activator {
+    font-size: 20px;
+}
+
 #pub-date {
     display: none;
 }
@@ -361,6 +368,12 @@ table th {
     }
     #pub-date {
         display: block;
+    }
+    .card .card-content .card-title {
+          line-height: 32px;
+    }
+    .card .card-title.activator {
+        font-size: 24px;
     }
 }
 
