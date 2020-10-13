@@ -61,7 +61,6 @@ def get_feature_image():
                 for x in range(1):
                     cover_img = j_response['items'][x]['volumeInfo']['imageLinks']['thumbnail']
                     vol_id = j_response['items'][x]['id']
-                    (print("--------", cover_img, vol_id))
                     str_cover = str(cover_img)
                     str_isbn = str(isbn)
                     str_id = str(vol_id)
