@@ -262,6 +262,10 @@ table th {
     margin-bottom: 15%;
 }
 
+#pub-date {
+    display: none;
+}
+
 .footer {
   text-align: center;
   font-size: 1.25rem;
@@ -354,6 +358,9 @@ table th {
     .flashes h4 {
     line-height: 2.5rem;
     font-size: 1.5rem;
+    }
+    #pub-date {
+        display: block;
     }
 }
 
