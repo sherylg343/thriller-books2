@@ -306,11 +306,6 @@ of search field
 <br>
 "After" State: "Gone Girl" in black type in search field
 <br>
-"Before" State: "Title" in teal text on white background in dropdown
-menu
-<br>
-"After" State: Title in black in dropdowm menu field
-<br>
 Option 1: Action Taken: Click on search icon button
 <br>
 "Before" State: white button with search icon on it
@@ -373,3 +368,122 @@ Test Result: Successful
 
 
 #### Part Seven: Book Review Form
+
+**Test #: 14**
+<p>
+Action Taken: Click on "Choose search type first" dropdowm menu in 
+search bar section at top of page, choose "Author"
+<br>
+"Before" State: "Author" in teal text on white background in dropdown
+menu
+<br>
+"After" State: Author in black in dropdowm menu field
+<br>
+Action Taken: Click in search bar and type "Daniel Silva"
+<br>
+"Before" State: white input field with "search" label at top left
+of search field
+<br>
+"After" State: "Daniel Silva" in black type in search field
+<br>
+Action Taken: Hit enter button
+<br>
+"Before" State: all fields filled as stated above
+<br>
+"After" State: Redirected to "Search Results" page
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 15**
+<p>
+Action Taken: Scroll down and click on "Write A Review" link in the
+"The Heist" book card 
+<br>
+"Before" State: "Write A Reviews" in gold text on white 
+background in card
+<br>
+"After" State: Redirected to "Book Review Form" for "The Heist" by
+Daniel Silva
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 16**
+<p>
+Action Taken: Scroll down and clicked on the far right star for a 
+5-star rating
+<br>
+"Before" State: 5 gray stars
+<br>
+"After" State: 5 gold stars
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 17**
+<p>
+Action Taken: Entered "A Good One!" as review title
+<br>
+"Before" State: white input field with light gray placeholder text
+of "Review Title"
+<br>
+"After" State: "A Good One!" typed in field and border below input 
+is green
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 18**
+<p>
+Action Taken: Entered "Enjoyed the story, another suspenseful Gabriel
+Allon plot!" as review
+<br>
+"Before" State: white input field with light gray placeholder text
+of "Enter your review here"
+<br>
+"After" State: "Enjoyed the story, another suspenseful Gabriel
+Allon plot!" typed in field and border below input is green
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 19**
+<p>
+Action Taken: Clicked on dropdown menu next to "Does your review
+contain spoilers?" and selected "No"
+<br>
+"Before" State: white dropdown menu with type of "Choose..."
+<br>
+"After" State: "No" is value in dropdown menu field
+<br>
+Test Result: Successful
+</p>
+
+**Test #: 20**
+<p>
+Action Taken: Click on "Submit Review" button
+<br>
+"Before" State: yellow "Submit Review" button and all form fields
+filled in
+<br>
+"After" State: Redirected to "ssg888's Profile Page" with message
+at top stating, "Thank you for submitting your review. You may View
+it by scrolling down this page."
+<br>
+Test Result: Successful
+</p>
+
+#### Part Eight: Edit Book Review
+**Test #: 21**
+<p>
+Action Taken: On Profile Page, scroll down to view book review
+just entered for "The Heist" and click on teal "Edit" button
+<br>
+"Before" State: teal "Edit" button next to red "Delete" button
+<br>
+"After" State: Redirected to "Edit Book Review" page, with fields
+filled in with current "The Heist" review
+<br>
+Test Result: Successful
+</p>
