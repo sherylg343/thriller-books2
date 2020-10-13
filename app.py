@@ -221,7 +221,7 @@ def update_review(review_id):
             }
         }
     )
-
+    flash("Thank you for editing your review. You may view the revised review by scrolling down this page.")
     return render_template(
         'my_book_reviews.html', display_name=d_name, book_reviews=book_reviews)
 
