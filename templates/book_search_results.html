@@ -21,7 +21,7 @@
                         {% for author in book['volumeInfo']['authors'] %}
 							<p class="card-subtitle">{{ author }}</p>
                         {% endfor %}
-                            <p id="pub-date" class="card-subtitle">{{ book['volumeInfo']['publishedDate'] }}</p>
+                            <p class="card-subtitle pub-date">{{ book['volumeInfo']['publishedDate'] }}</p>
                              <p><a href="{{ url_for('book_profile', volume_id=book['id']) }}">Book Profile & Reviews</a></p>
                         </div>
 						<div class="card-action">

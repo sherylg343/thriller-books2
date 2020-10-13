@@ -268,7 +268,7 @@ table th {
     font-size: 20px;
 }
 
-#pub-date {
+.pub-date {
     display: none;
 }
 
@@ -365,7 +365,7 @@ table th {
     line-height: 2.5rem;
     font-size: 1.5rem;
     }
-    #pub-date {
+    .pub-date {
         display: block;
     }
     .card .card-content .card-title {
