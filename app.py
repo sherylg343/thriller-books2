@@ -83,27 +83,26 @@ def get_feature_image():
 
 @app.route('/book_search_results', methods=["GET", "POST"])
 def book_search_results():
-    if request.method == "POST":
-        search_text = request.form.get('search')
-        search_text_formatted = search_text.replace(" ", "+")
-        search_type = request.form.get('search-type')
-        search_type_formatted = "in" + search_type + ":"
-        url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            # convert json response into Python data
-            j2_response = response.json()
+    search_text = request.form.get('search')
+    search_text_formatted = search_text.replace(" ", "+")
+    search_type = request.form.get('search-type')
+    search_type_formatted = "in" + search_type + ":"
+    url = 'https://www.googleapis.com/books/v1/volumes?q=' + search_type_formatted + search_text_formatted + '&key=' + API_KEY
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        # convert json response into Python data
+        j2_response = response.json()
 
-        except HTTPError as http_err:
-            print(f'HTTP error occurred: {http_err}')
-            flash("An error occurred in processing your search. Please try again or try at a later time.")
-            return render_template('index.html')
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+        flash("An error occurred in processing your search. Please try again or try at a later time.")
+        return render_template('index.html')
 
-        except Exception as err:
-            print(f'Other error occurred: {err}')
-            flash("An error occurred in processing your search. Please try again or try at a later time.")
-            return render_template('index.html')
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+        flash("An error occurred in processing your search. Please try again or try at a later time.")
+        return render_template('index.html')
 
     return render_template(
         'book_search_results.html', books=j2_response)
