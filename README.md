@@ -434,7 +434,7 @@ button to the right of it to copy the link.
 place the cloned directory.
 5. Type ```git clone```, then paste the clone URL address copied in step 2 
 as follows:
-```console git clone https://sherylg343.github.io/smarthome/```
+```console git clone https://sherylg343.github.io/thriller-books2/```
 6. Press enter to finish creating the local clone.
 
 <p>
