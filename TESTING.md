@@ -487,3 +487,23 @@ filled in with current "The Heist" review
 <br>
 Test Result: Successful
 </p>
+
+**Test #: 22**
+<p>
+Action Taken: On edit form, scroll down to change rating from
+5 to a 4
+<br>
+"Before" State: input field below "*My Rating(click to rate):"
+was "5"
+<br>
+"After" State: rating value changed to "4"
+<br>
+Action Taken: click on yellow button "Submit Edit"
+<br>
+"Before" State: yellow button says "Submit Edit"
+was "5"
+<br>
+"After" State: redirect to "ssg888's Book Reviews" page
+<br>
+Test Result: Successful
+</p>

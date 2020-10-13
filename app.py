@@ -150,7 +150,6 @@ def book_review_form(volume_id):
                 flash("You have already submitted a review for this book. You may edit or delete it below.")
                 return render_template(
                     "my_book_reviews.html", display_name=d_name, book_reviews=mongo.db.book_reviews.find())
-        today = date.today()
         volume_base_url = 'https://www.googleapis.com/books/v1/volumes/'
         volume_full_url = volume_base_url + volume_id
         try:
@@ -180,9 +179,12 @@ def book_review_form(volume_id):
 @app.route('/insert_review', methods=["POST"])
 def insert_review():
     book_reviews = mongo.db.book_reviews
-    book_reviews.insert_one(request.form.to_dict())
     d_name = mongo.db.users.find_one(
         {"email": session["email"]})["display_name"]
+    review_data = request.form.to_dict()
+    review_data["display_name"] = d_name
+    review_data["date"] = date.today()
+    review.insert_one(review_data)
     book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
     flash("Thank you for submitting your review. You may view it by scrolling down this page.")
     return render_template(
