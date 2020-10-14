@@ -19,16 +19,19 @@ Find Thrillers Book Community Website
 * Throughout development of the website, Google Chrome Developer Tools were used
 to track changes and troubleshoot problems. The terminal proved invaluable in
 troubleshoot Python code.
-* The Materialize footer has been troublesome from the beginning. I commented
-it out, deciding to deal with it later. A container class caused it to 
+* The Materialize footer has been troublesome from the beginning. 
+I commented it out, deciding to deal with it later. Once I started to 
+work on it, I found that a container class caused it to 
 scroll horizontally and once that was removed it started floating up when
-content wasn't available to push it to the bottom. Affter duplicating all
+content wasn't available to push it to the bottom. After duplicating all
 suggested code in Materialize's documentation, the footer would not move
 to the bottom of the page and it was creating significant left and right
 margin issues for the search bar and flash message sections of the base.html
-code. After online research, also tried positioning footer absolutely, which
+code. After online research and consulting with my mentor, I 
+also tried positioning footer absolutely, which
 did not work either. So given that only social media links, a copyright and
 terms and conditions link were in footer - it was left out at this time.
+It would be added in the next phase.
 * At the end of the development process, 
 [W3C CSS Validation](https://jigsaw.w3.org/css-validator/)
 and [Nu Html Checker](https://validator.w3.org/) were used. 

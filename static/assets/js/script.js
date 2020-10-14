@@ -37,10 +37,10 @@ and remove the 'on' class from all next labels. This stops the flicker of removi
 
 /** from mentor Brian Macharia, allow user cancel or confirm delete of
 book review before deleting */
-/**function confirmDelete(reviewID) {
+function confirmDelete(reviewID) {
     deleteUrl = '/delete_review' + reviewID
     let deleteConfirmed = confirm('Are you certain you want to delete this review?')
     if (deleteConfirmed) {
         location.href = deleteURL
     }
-}*/
+}
