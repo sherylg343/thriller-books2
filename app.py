@@ -51,11 +51,7 @@ def get_feature_image():
     for book in check_books:
         if (book["image"] == "") or (book["volume_id"] == ""):
             isbn = book["isbn"]
-            title = book['title']
-            title_formatted = title.replace(" ", "+")
-            author = book['author']
-            author_formatted = author.replace(" ", "+")
-            img_url = SEARCH_BASE_URL + "intitle:" + title_formatted + "+" + "inauthor:" + author_formatted + '&key=' + API_KEY
+            img_url = SEARCH_BASE_URL + "isbn:" + isbn + '&key=' + API_KEY
             """ Calling Google Books API and putting in json format
             while accommodating any errors that occur with HTTPError module
             """

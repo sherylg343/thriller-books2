@@ -84,6 +84,10 @@ h3.section-subheading {
   margin-left: 8%;
 }
 
+#book-reviews p {
+    font-weight: 500;
+}
+
 /*------------- Buttons, Icons, Links ----------*/
 #search-btn {
     position: relative;

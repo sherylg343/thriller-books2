@@ -252,12 +252,17 @@ the Google Book API so the error code with print to the terminal and
 a flash message will display to the user.
 * Werkzeug security was employed to protect user passwords when storing
 them in a user database.
-* Book review forms are required to ensure basic information is collected
+* Book review forms are designed to ensure basic information is collected
 so that the reviews provide value to readers. These required fields are
-marked so user realizes they are required.
+marked so user realizes they are required. HTML validation is also
+set up regarding type of field, type of input, and size limits.
 * Review form does include volume id and book title so they are captured
-for database, however, both input fields are disabled, so they cannot
+for database, however, both input fields are "readonly," so they cannot
 be altered by the user.
+* The edit form for book reviews also has "readonly" fields that can't
+be altered and key inputs are still marked required. The rating field
+does not use stars, but is designated a "number" type with a range
+of 1 to 5 to ensure the correct value range is selected.
 * The Review Title and Review Text have minimum and maximum lengths 
 included in html tags to provide front-end validation.
 * A search criterion is required when searching for a book to provide
