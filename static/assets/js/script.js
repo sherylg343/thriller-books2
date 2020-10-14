@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    /** all of these functions added for Materialize */
     $(".dropdown-trigger").dropdown();
     $('.sidenav').sidenav();
     $('body').scrollspy({ target: '#nav-parent' })

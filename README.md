@@ -218,10 +218,8 @@ was selected: black, shades of gray, yellow, dark teal and white.
 * all input fields are white, so a background of gray was selected so they
 are easily identified and provide a soothing color-coordinated background.
 2. Fonts:
-* selected by Materialize, but chose not to over-ride them as they were
-easy to read and eye-catching.
-* when gray background was applied, readability did suffer, so font-weight
-for the site was increased to 700 universally.
+* fonts part of Start Bootstrap theme initially selected - headers are mix of Droid Serif and Montserrat and body is Montserrat. Droid Serif has more style and used
+when stylized type needed and Montserrat is simple and clear for all other type.
 3. Images/Icons:
 * Jumbotron image selected to attract attention and correspond with theme
 of thriller/suspense novels
@@ -294,6 +292,11 @@ Providing a community forum to discuss books, authors, plots, etc.
 will help build a sense of community among the users. This is an
 important feature to add for the mission of the website.
 
+### Add Footer
+Technical difficulties with Materialize's preset values resulted in 
+not being able to implement their sticky footer or an absolute footer.
+This should be addressed in the next phase.
+
 ### Truncate book descriptions and long reviews and include a "Read More" link or button
 This would provide a cleaner website and the user would see more information
 without having to scroll down. This feature would improve usability.
@@ -306,6 +309,11 @@ lose it.
 This would help guard the site against malicious hacking and inserting
 of inappropriate data.
 
+## Add Stars for rating in review edit form
+Currently the edit form depicts a reviewer's rating as a number
+between 1 and 5. The input field requires a number within that range.
+However, it would be better to implement the star rating in edit
+form as in the original form.
 <p>
 
 [Back to Top](#Table-of-Contents)

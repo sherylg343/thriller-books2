@@ -27,12 +27,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>*My Rating(click to rate):</td>
+                        <td>*My Rating(values 1 to 5):</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="container">
-                                <input type="text" name="rating" value="{{ review.rating }}">
+                                <input type="number" name="rating" min="1" max="5" value="{{ review.rating }}" >
                             </div>
                         </td>
                     </tr>

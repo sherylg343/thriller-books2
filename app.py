@@ -164,6 +164,7 @@ def book_review_form(volume_id):
             {'volume_id': volume_id})
         d_name = mongo.db.users.find_one(
             {"email": session["email"]})["display_name"]
+        today = date.today()
         for review in reviews:
             if review['display_name'] == d_name:
                 flash("You have already submitted a review for this book. You may edit or delete it below.")
@@ -187,7 +188,7 @@ def book_review_form(volume_id):
             return render_template('index.html')
 
         return render_template(
-            'book_review_form.html', book=vol_response)
+            'book_review_form.html', book=vol_response, today=today)
     else:
         flash("Please log in first prior to writing a review.")
         return render_template("login.html")
@@ -202,7 +203,6 @@ def insert_review():
         {"email": session["email"]})["display_name"]
     review_data = request.form.to_dict()
     review_data["display_name"] = d_name
-    review_data["date"] = date.today()
     book_reviews.insert_one(review_data)
     book_reviews = mongo.db.book_reviews.find({'display_name': d_name})
     flash("Thank you for submitting your review. You may view it by scrolling down this page.")

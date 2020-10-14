@@ -7,7 +7,7 @@
     --clr-ltgray: #e0e0e0;
     --clr-gray: #808080;
     --clr-darkgray: #616161;
-    --clr-gold: #FFDF00;
+    --clr-gold: #fdd835;
     --clr-metallicgold: #D4AF37;
     --clr-darkteal: #006666;
     --clr-white: #ffffff;
@@ -17,9 +17,12 @@
 body {
   position: relative;
   background-color: #cfd8dc;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /*------- Text and Headers -----------*/
+/* The long list of fonts was included to address system fonts in variety
+of browsers and devices - used by Bootstrap and GitHub, found in Start Bootstrap code*/
 #masthead img {
     width: 100%;
     margin: 0px 0px;
@@ -42,7 +45,7 @@ body {
     margin-top: -10rem;
     margin-left: 15%;
     color: var(--clr-white) ;
-    text-shadow: 2px 2px 8px var(--clr-gold);
+    text-shadow: 3px 3px 8px var(--clr-gold);
 }
 
  .masthead-heading {
@@ -56,7 +59,7 @@ body {
     margin-top: -10rem;
     margin-left: 3%;
     color: var(--clr-white);
-    text-shadow: 2px 2px 8px var(--clr-gold);
+    text-shadow: 3px 3px 8px var(--clr-gold);
 }
 
 h2.section-heading {
@@ -447,11 +450,10 @@ table th {
         line-height: 1.5rem;
     }
     .btn-small {
-        height: 60px;
-        width: 300px;
+        height: 35px;
+        width: 120px;
         line-height: 40px;
-        font-size: 30px;
-        padding-top: 8px;
+        font-size: 20px;
     }
     .select-wrapper input.select-dropdown {
         font-size: 1.2rem;
