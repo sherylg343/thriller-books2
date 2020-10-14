@@ -35,12 +35,3 @@ and remove the 'on' class from all next labels. This stops the flicker of removi
     $el.closest('td').prevAll().find('label').addClass('on');
     $el.closest('td').nextAll().find('label').removeClass('on');
 };
-
-/** from mentor Brian Macharia, allow user cancel or confirm delete of
-book review before deleting */
-function confirmDelete(deleteUrl) {
-    let deleteConfirmed = confirm('Are you certain you want to delete this review?')
-    if (deleteConfirmed) {
-        location.href = deleteURL
-    }
-}
