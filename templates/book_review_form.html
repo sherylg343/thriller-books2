@@ -38,7 +38,7 @@
                         <td>Book Title</td>
                         <td>
                             <div class="input-field">
-                                <input id="book_title" name="book_title" type="text" value="{{ book['volumeInfo']['title']}}" disabled>
+                                <input id="book_title" name="book_title" type="text" value="{{ book['volumeInfo']['title']}}" readonly="readonly">
                                 <label for="book_title"></label>
                             </div>
                         </td>
@@ -47,7 +47,7 @@
                         <td>Volume Id</td>
                         <td>
                             <div class="input-field">
-                                <input id="volume_id" name="volume_id" type="text" value="{{ book['id'] }}" disabled>
+                                <input id="volume_id" name="volume_id" type="text" value="{{ book['id'] }}" readonly="readonly">
                                 <label for="volume_id"></label>
                             </div>
                         </td>
@@ -56,7 +56,7 @@
                         <td>Review Date</td>
                         <td>
                             <div class="input-field">
-                                <input id="date" name="date" type="text" value="{{ today }}" disabled>
+                                <input id="date" name="date" type="text" value="{{ today }}" readonly="readonly">
                                 <label for="date"></label>
                             </div>
                         </td>
