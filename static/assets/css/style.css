@@ -290,6 +290,7 @@ table th {
   height: 5rem;
 }
 
+/*--------------- Media Queries --------------*/
 @media (min-width: 768px) {
     .brand-logo img {
         height: 3rem;
