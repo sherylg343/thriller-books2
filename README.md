@@ -316,6 +316,12 @@ However, it would be better to implement the star rating in edit
 form as in the original form.
 <p>
 
+## Add confirm message
+I worked with my mentor to add a confirm request box prior to deletion, but
+the onclick function in the anchor tag didn't work after several changes. 
+This is a great idea, just needs more time to troubleshoot it.
+<p>
+
 [Back to Top](#Table-of-Contents)
 </p>
 ---

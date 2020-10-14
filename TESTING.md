@@ -52,6 +52,16 @@ and [Nu Html Checker](https://validator.w3.org/) were used.
  3. A table that was being iterated over for reviews had an id that was
  being duplicated so it was changed to a class.
 
+ ### Remaining Issues
+ * The JavaScript console is still stating an error that $().scrollspy is not
+ a function - however, that was a function dictated by and copied from
+Materialize documentation, so it was left in.
+ * In the terminal, a Python error still remains, "Other error occurred: 'items'".
+ This addresses the loop in book_search_results where it was necessary to 
+ loop through "book["items"]" to get to the fields needed. Since the loop 
+ works and a number of other alternatives were tried that did not
+ work, it was decided to leave it and accept the error.
+
  ### Browser and Device Evaluations
 * The website has been tested on three browsers: Google Chrome, Safari and Firefox.
 It was also tested on a variety of devices - iPhone 5, 8 and 10, iPads, and 
@@ -519,11 +529,8 @@ just entered for "The Heist" and click on red "Delete" button
 <br>
 "Before" State: teal "Edit" button next to red "Delete" button
 <br>
-"After" State: A pop-up box appears with the website address on 
-it and the following question, "Are you certain you want to delete
-this review?" "Cancel" and "OK" are the two options offerred. Click
-on "OK" and I'm redirected to "ssg888's Book Reviews" page where a
-message flashes across the top: ""Review successfully deleted"
+"After" State: redirect to "ssg888's Book Reviews" page where a
+message flashes across the top: "Review successfully deleted"
 <br>
 Test Result: Successful
 </p>

@@ -21,7 +21,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="book-title" name="book-title" type="text" value="{{ review.book_title }}" disabled>
+                                <input id="book-title" name="book-title" type="text" value="{{ review.book_title }}" readonly="readonly">
                                 <label for="book-title"></label>
                             </div>
                         </td>
@@ -32,7 +32,7 @@
                     <tr>
                         <td>
                             <div class="container">
-                                <input type="number" name="rating" min="1" max="5" value="{{ review.rating }}" >
+                                <input type="number" name="rating" min="1" max="5" value="{{ review.rating }}" required>
                             </div>
                         </td>
                     </tr>
@@ -42,7 +42,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <input id="review-title" name="review-title" type="text" value="{{ review.review_title }}" minlength="4" maxlength="100">
+                                <input id="review-title" name="review-title" type="text" value="{{ review.review_title }}" minlength="4" maxlength="100" required>
                                 <label for="review-title"></label>
                             </div>
                         </td>
@@ -53,7 +53,7 @@
                     <tr>
                         <td>
                             <div class="input-field">
-                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" minlength="40" maxlength="5000">{{ review.review_text }}</textarea>
+                                <textarea id="review-textarea" name="review-text" class="materialize-textarea" minlength="40" maxlength="5000" required>{{ review.review_text }}</textarea>
                                 <label for="review-textarea"></label>
                             </div>
                         </td>
